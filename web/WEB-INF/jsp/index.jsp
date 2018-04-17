@@ -3,12 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>${initParam.PageTitle}</title>
-  <link rel="shortcut icon" type="image/x-icon" href="${initParam.PageIco}" media="screen" />
-  <meta charset="UTF-8">
-  <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <script src="js/jquery.min.js"></script>
+  <jsp:include page="include/common_import.jsp" />
   <script type="text/javascript">
       jQuery(document).ready(function($) {
           $(".scroll").click(function(event){
@@ -17,10 +12,7 @@
           });
       });
   </script>
-  <link href="css/style.css" rel='stylesheet' type='text/css' />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-  <link href='http://fonts.useso.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 <jsp:include page="include/header.jsp" />
@@ -63,6 +55,8 @@
   </div>
 </div>
 </div>
+
 <jsp:include page="include/footer.jsp" />
+
 </body>
 </html>

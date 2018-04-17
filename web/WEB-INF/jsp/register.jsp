@@ -2,15 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>注册界面</title>
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <script src="js/jquery.min.js"></script>
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <link href='http://fonts.useso.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css'>
+    <jsp:include page="include/common_import.jsp" />
+
     <style type="text/css">
 
         body{
@@ -90,12 +83,9 @@
             </div>
         </div>
     </div>
-
-    <div class="footer_bottom" style="background-color: rgba(0,0,0,0)">
-        <div class="copy">
-            <p>Copyright &copy; 2018 AWESOME RESUME by 18th group in software engineering class</p>
-        </div>
-    </div>
 </div>
+
+<jsp:include page="include/footer.jsp" />
+
 </body>
 </html>
