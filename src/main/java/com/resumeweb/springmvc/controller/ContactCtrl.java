@@ -9,7 +9,8 @@ public class ContactCtrl {
 
     @RequestMapping("/contact")
     public String contact(Model model){
-
+        model.addAttribute("title","联系我们");
+        model.addAttribute("page_id",4);
         return "contact";
     }
 }

@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomePageCtrl {
     @RequestMapping({"/homepage","/"})
     public String homepage(Model model){
-
+        model.addAttribute("title","主页");
+        model.addAttribute("page_id",1);
         return "index";
     }
 }

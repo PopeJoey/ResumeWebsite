@@ -9,7 +9,7 @@ public class WriteCtrl {
 
     @RequestMapping("/write")
     public String write(Model model){
-
+        model.addAttribute("title","填写信息");
         return "write";
     }
 }

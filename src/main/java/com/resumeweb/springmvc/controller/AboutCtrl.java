@@ -9,7 +9,8 @@ public class AboutCtrl {
 
     @RequestMapping("/about")
     public String about(Model model){
-
+        model.addAttribute("title","关于我们");
+        model.addAttribute("page_id",3);
         return "about";
     }
 }

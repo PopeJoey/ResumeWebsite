@@ -9,7 +9,7 @@ public class RegisterCtrl {
 
     @RequestMapping("/register")
     public String showRegister(Model model){
-
+        model.addAttribute("title","注册");
         return "register";
     }
 }

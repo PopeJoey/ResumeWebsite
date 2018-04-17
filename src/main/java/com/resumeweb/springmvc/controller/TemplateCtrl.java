@@ -9,7 +9,8 @@ public class TemplateCtrl {
 
     @RequestMapping("/template")
     public String template(Model model){
-
+        model.addAttribute("title","模板列表");
+        model.addAttribute("page_id",2);
         return "template";
     }
 

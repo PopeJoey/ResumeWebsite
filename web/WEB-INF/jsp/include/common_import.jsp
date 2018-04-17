@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<title>${initParam.PageTitle}</title>
+<title>${title} - ${initParam.PageTitle}</title>
 <link rel="shortcut icon" type="image/x-icon" href="${initParam.PageIco}" media="screen" />
 
 <meta charset="UTF-8">

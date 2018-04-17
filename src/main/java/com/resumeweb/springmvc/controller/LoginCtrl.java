@@ -9,7 +9,7 @@ public class LoginCtrl {
 
     @RequestMapping("/login")
     public String showLogin(Model model){
-
+        model.addAttribute("title","登录");
         return "login";
     }
 }

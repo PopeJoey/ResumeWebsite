@@ -38,12 +38,12 @@
             <div class="logo"> <a href="index.jsp"><img src="images/lg1.png" alt="resume"></a> </div>
             <div class="menu"> <a class="toggleMenu" href="#"><img src="images/nav_icon.png" alt="" /> </a>
                 <ul class="nav" id="nav">
-                    <li><a href="index.jsp">首页</a></li>
-                    <li><a href="template.jsp">模板</a></li>
-                    <li><a href="about.jspabout.html">关于我们</a></li>
-                    <li><a href="contact.jspcontact.html">联系我们</a></li>
-                    <li><a href="login.jsplogin.html">登录</a></li>
-                    <li class="current"><a href="register.jspregister.html">注册</a></li>
+                    <li><a href="./homepage">首页</a></li>
+                    <li><a href="./template">模板</a></li>
+                    <li><a href="./about">关于我们</a></li>
+                    <li><a href="./contact">联系我们</a></li>
+                    <li><a href="./login">登录</a></li>
+                    <li class="current"><a href="./register">注册</a></li>
                     <div class="clear"></div>
                 </ul>
                 <script type="text/javascript" src="js/responsive-nav.js"></script>
