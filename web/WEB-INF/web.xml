@@ -10,12 +10,12 @@
 
     <context-param>
         <param-name>PageTitle</param-name>
-        <param-value>ResumeWebsite</param-value>
+        <param-value>AWESOME RESUME</param-value>
     </context-param>
 
     <context-param>
-        <param-name>DomainInfo</param-name>
-        <param-value>蜀ICP备17024888-2号 2017 All right received</param-value>
+        <param-name>PageIco</param-name>
+        <param-value>images/lg1.png</param-value>
     </context-param>
 
     <listener>
