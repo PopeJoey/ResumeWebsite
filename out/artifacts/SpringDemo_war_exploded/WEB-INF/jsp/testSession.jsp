@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-This is session test.
+Log in successfully.
 </body>
 </html>

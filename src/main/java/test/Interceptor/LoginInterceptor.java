@@ -1,6 +1,6 @@
 package main.java.test.Interceptor;
 
-import main.java.test.Bean.User;
+import main.java.test.Bean.UserSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        String[] allowUrls=new String[]{"/index","/login","/about","/contact","/register","/template"};
+        String[] allowUrls=new String[]{"/index","/login","/about","/contact","/register","/template","/home"};
         HttpSession session=httpServletRequest.getSession();
         String url=httpServletRequest.getRequestURL().toString();
 
@@ -20,7 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return true;
             }
         }
-        User user=(User)session.getAttribute("currentUser");
+        UserSession user=(UserSession)session.getAttribute("currentUser");
         if (user==null){
 
             httpServletResponse.sendRedirect("http://localhost:8080/login");

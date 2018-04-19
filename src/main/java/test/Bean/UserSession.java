@@ -1,10 +1,10 @@
 package main.java.test.Bean;
 
-public class User {
+public class UserSession {
     private String username;
     private String password;
 
-    public User(String username, String password) {
+    public UserSession(String username, String password) {
         this.username = username;
         this.password = password;
     }

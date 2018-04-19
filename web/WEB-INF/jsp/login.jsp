@@ -39,6 +39,7 @@
 
 </head>
 <body>
+
 <div background="images/1.jpg">
     <div class="header" style="background-color: rgba(0,0,0,0)">
         <div class="container">
@@ -83,7 +84,7 @@
                         </label>
                     </div>
                     <div class="form-group col-md-offset-9">
-                        <button type="submit" class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc" name="submit">登录</button>
+                        <button type="submit"  class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc" name="submit">登录</button>
                     </div>
                     <br>
                 </div>
