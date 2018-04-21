@@ -3,14 +3,24 @@ package com.resumeweb.entity;
 import java.util.ArrayList;
 
 public class User {
-    int userId;
-    String userAccount;
-    String email;
+    private int userId;
+    private String userAccount;
+    private String email;
+    private String password;
+
+
 
     ArrayList<Resume> resumes;
 
     public ArrayList<Resume> getResumes() {
         return resumes;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setResumes(ArrayList<Resume> resumes) {
@@ -36,6 +46,7 @@ public class User {
     public String getEmail() {
         return email;
     }
+
 
     public void setEmail(String email) {
         this.email = email;
