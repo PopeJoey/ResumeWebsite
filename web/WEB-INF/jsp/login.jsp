@@ -6,22 +6,22 @@
     <style type="text/css">
 
         body{
-            background: url("images/1.jpg");
+            background: url("images/login1.jpg");
             animation-name:myfirst;
             animation-duration:12s;
             animation-delay:2s;
             animation-iteration-count:infinite;
             animation-play-state:running;
         }
-/*
-        @keyframes myfirst
-        {
-            0%   {background:url("images/1.jpg");}
-            34%  {background:url("images/2.jpg");}
-            67%  {background:url("images/3.jpg");}
-            100% {background:url("images/1.jpg");}
-        }
-*/
+        /*
+                @keyframes myfirst
+                {
+                    0%   {background:url("images/login1.jpg");}
+                    34%  {background:url("images/2.jpg");}
+                    67%  {background:url("images/3.jpg");}
+                    100% {background:url("images/login1.jpg");}
+                }
+        */
         .form{background: rgba(255,255,255,0.2);width:400px;margin:120px auto;}
         /*阴影*/
         .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
@@ -31,34 +31,16 @@
 
 </head>
 <body>
-<div background="images/1.jpg">
-    <div class="header" style="background-color: rgba(0,0,0,0)">
-        <div class="container">
-            <div class="logo"> <a href="index.jsp"><img src="images/lg1.png" alt="resume"></a> </div>
-            <div class="menu"> <a class="toggleMenu" href="#"><img src="images/nav_icon.png" alt="" /> </a>
-                <ul class="nav" id="nav">
-                    <li><a href="./homepage">首页</a></li>
-                    <li><a href="./template">模板</a></li>
-                    <li><a href="./about">关于我们</a></li>
-                    <li><a href="./contact">联系我们</a></li>
-                    <li class="current"><a href="./login">登录</a></li>
-                    <li><a href="register">注册</a></li>
-                    <div class="clear"></div>
-                </ul>
-                <script type="text/javascript" src="js/responsive-nav.js"></script>
-            </div>
-    <div class="clearfix"> </div>
-    </div>
-    </div>
+<jsp:include page="include/header.jsp" />
 
-    <div class="container">
-        <div class="form row">
-            <div class="form-horizontal" id="login_form">
-                <br>
-                <!--
-                <h3 class="form-title" style="text-align: center">登录</h3>
-                -->
-                <div class="col-md-offset-2">
+<div class="container" >
+    <div class="form row">
+        <div class="form-horizontal" id="login_form">
+            <br>
+            <!--
+            <h3 class="form-title" style="text-align: center">登录</h3>
+            -->
+            <div class="col-md-offset-2">
                 <div class="col-md-10">
                     <div class="form-group">
                         <i class="fa fa-user fa-lg"></i>
@@ -75,10 +57,15 @@
                         </label>
                     </div>
                     <div class="form-group col-md-offset-9">
-                        <button type="submit" class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc" name="submit">登录</button>
+                        <a href="./my"><button type="submit" class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc" name="submit">登录</button></a>
                     </div>
                     <br>
-                </div>
+                    <div class="form-group col-md-offset-9">
+                        <a href="./register">
+                            <button type="submit" class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc">无账号？注册</button>
+                        </a>
+                    </div>
+                    <br>
                 </div>
             </div>
         </div>
