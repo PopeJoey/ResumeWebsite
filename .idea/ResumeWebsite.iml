@@ -39,5 +39,6 @@
     <orderEntry type="library" name="Spring MVC-4.3.16.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.7" level="application_server_libraries" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" name="lib" level="application" />
   </component>
 </module>
