@@ -45,8 +45,8 @@ public class base_infoDaoImp implements base_infoDao {
 
     @Override
     public void deleteBaseInfo(BaseInfo baseInfo) {
-       String sql="DELETE FROM base_info WHERE user_id=?";
-       jdbcTemplateObject.update(sql,baseInfo.getUserId());
+       String sql="DELETE FROM base_info WHERE baseinfo_id=?";
+       jdbcTemplateObject.update(sql,baseInfo.getBaseInfoId());
     }
 
     @Override

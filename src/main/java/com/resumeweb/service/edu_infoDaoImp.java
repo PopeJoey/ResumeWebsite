@@ -42,13 +42,13 @@ public class edu_infoDaoImp implements edu_infoDao {
 
     @Override
     public void deleteEduInfo(EduInfo eduInfo) {
-       String sql="DELETE FROM edu_info WHERE user_id=?";
-       jdbcTemplateObject.update(sql,eduInfo.getUserId());
+       String sql="DELETE FROM edu_info WHERE edu_info_id=?";
+       jdbcTemplateObject.update(sql,eduInfo.getEduInfoId());
     }
 
     @Override
-    public EduInfo getEduInfo(int user_id) {
-        String sql="";
+    public EduInfo getEduInfo(int edu_info_id) {
+        String sql="SELECT * FROM edu_info WHERE edu_info_id=?";
         return jdbcTemplateObject.queryForObject(sql, new RowMapper<EduInfo>() {
             @Override
             public EduInfo mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -63,6 +63,6 @@ public class edu_infoDaoImp implements edu_infoDao {
                 eduInfo.setRank(resultSet.getString(8));
                 return eduInfo;
             }
-        },user_id);
+        },edu_info_id);
     }
 }

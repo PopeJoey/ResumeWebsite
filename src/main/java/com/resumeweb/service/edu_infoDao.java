@@ -6,5 +6,5 @@ public interface edu_infoDao {
     public void addEduInfo(EduInfo eduInfo);
     public void updateEduInfo(EduInfo eduInfo);
     public void deleteEduInfo(EduInfo eduInfo);
-    public EduInfo getEduInfo(int user_id);
+    public EduInfo getEduInfo(int edu_info_id);
 }
