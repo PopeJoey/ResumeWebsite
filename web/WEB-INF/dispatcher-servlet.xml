@@ -36,4 +36,11 @@
     <mvc:resources mapping="/fonts/**" location="/fonts/" />
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
+    <!-- 表单验证支持 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <value>messages</value>
+        </property>
+    </bean>
+
 </beans>

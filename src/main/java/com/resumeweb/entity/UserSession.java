@@ -1,8 +1,17 @@
 package com.resumeweb.entity;
+
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+
 //session中保存用户状态的类
-public class UserSession {
+public class UserSession implements Serializable {
+    @Size(min = 6,max = 20)
     private String username;
+
+    @Size(min = 6,max = 20)
     private String password;
+
+    public UserSession(){}
 
     public UserSession(String username, String password) {
         this.username = username;
@@ -23,5 +32,11 @@ public class UserSession {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString(){
+        return "UserSession [" + "username=" + username + ", password=" + password
+                         + "]";
     }
 }
