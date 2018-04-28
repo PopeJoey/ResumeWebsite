@@ -19,7 +19,7 @@
     <bean id="userDaoImp" class="com.resumeweb.service.userDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    <bean id="LogAndRegisterService" class="com.resumeweb.Interceptor.LogAndRegisterService">
+    <bean id="LogAndRegisterService" class="com.resumeweb.service.LogAndRegisterService">
         <property name="userDaoImp" ref="userDaoImp"/>
     </bean>
 
