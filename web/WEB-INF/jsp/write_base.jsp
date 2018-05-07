@@ -34,18 +34,24 @@
         <div class="container">
             <div class="contact_bottom">
                 <form method="post" action="contact-post.html">
-                    <div class="contact-to">
-                        <input type="text" class="text" value="Name" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}">
-                        <input type="text" class="text" value="Gender" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}" style="margin-left: 10px">
-                        <input type="text" class="text" value="Age" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Subject';}" style="margin-left: 10px">
+                    <div class="contact-to" style="clear:both;">
+                        <select class="form-control" style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;">
+                            <option>简约模板</option>
+                            <option>正式模板</option>
+                        </select>
                     </div>
-                    <div class="contact-to">
+                    <div class="contact-to" style="clear:both;">
+                        <input type="text" class="text" value="Name" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}">
+                        <input type="text" class="text" value="Age" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Age';}" style="margin-left: 10px">
+                        <input type="text" class="text" value="Phone Number" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Phone Number';}" style="margin-left: 10px">
+                    </div>
+                    <div class="contact-to" style="clear:both;">
                         <input type="text" class="text" value="Address" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Address';}">
-                        <input type="text" class="text" value="Phone Number" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Phone Name';}" style="margin-left: 10px">
-                        <select class="form-control" onkeydown="Select.del(this,event)" onkeypress="Select.write(this,event)" >
-						<option></option>
-						<option>457067940@qq.com</option>
-						</select>
+                        <input type="text" class="text" value="Email" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}" style="margin-left: 10px">
+                        <select class="form-control" onkeydown="Select.del(this,event)" onkeypress="Select.write(this,event)" style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;margin-left: 10px">
+                            <option>男</option>
+                            <option>女</option>
+                        </select>
                     </div>
                     <div class="text2">
                         <textarea value="Self-instroduction:" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Brief self-instroduction';}">Brief self-instroduction</textarea>
