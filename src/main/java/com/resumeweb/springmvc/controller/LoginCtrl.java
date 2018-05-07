@@ -2,6 +2,8 @@ package com.resumeweb.springmvc.controller;
 
 import com.resumeweb.entity.UserSession;
 import com.resumeweb.service.LogAndRegisterService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,7 +29,10 @@ public class LoginCtrl {
         if(result.hasErrors()) {
             return "login";
         }
-        LogAndRegisterService service = new LogAndRegisterService();
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("main/resources/Beans.xml");
+
+        LogAndRegisterService service = (LogAndRegisterService)context.getBean("LogAndRegisterService");
         if(service.logIn(userSession.getUsername(),userSession.getPassword())){
             model.addAttribute("currentUser",service.getUserId(userSession.getUsername()));
             return "redirect:/homepage";

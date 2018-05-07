@@ -2,7 +2,7 @@ package com.resumeweb.DAO;
 import com.resumeweb.entity.User;
 import javax.sql.DataSource;
 
-public interface userDao {
+public interface UserDao {
     public void setDataSource(DataSource dataSource);
     public void addUser(User u);
     public void deleteUser(User u);

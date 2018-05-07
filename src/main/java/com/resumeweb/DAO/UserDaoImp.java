@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 
 @Repository
-public class userDaoImp implements userDao {
+public class UserDaoImp implements UserDao {
 
     private JdbcTemplate jdbcTemplateObject;
-    public userDaoImp() {
+    public UserDaoImp() {
 
     }
     @Autowired
