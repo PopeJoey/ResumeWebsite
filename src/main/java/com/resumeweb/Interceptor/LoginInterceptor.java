@@ -13,7 +13,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         //未登录时可以访问的url
-        String[] allowUrls=new String[]{"/index","/login","/about","/contact","/register","/template","/home"};
+        String[] allowUrls=new String[]{"/homepage","/login","/about","/contact","/register","/template"};
         HttpSession session=httpServletRequest.getSession();
         String url=httpServletRequest.getRequestURL().toString();
 

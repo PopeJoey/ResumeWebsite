@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +35,7 @@
 <jsp:include page="include/header.jsp" />
 
 <div class="container" >
+    <form:form method="post" modelAttribute="UserSession" action="./tologin">
     <div class="form row">
         <div class="form-horizontal" id="login_form">
             <br>
@@ -44,11 +46,17 @@
                 <div class="col-md-10">
                     <div class="form-group">
                         <i class="fa fa-user fa-lg"></i>
-                        <input class="form-control required" type="text" placeholder="账号" id="username" name="username" autofocus="autofocus" maxlength="20"/>
+                        <form:input path="username" class="form-control required" type="text" placeholder="账号" id="username" name="username" autofocus="autofocus" maxlength="20"/>
+                        <div class="has-error">
+                            <form:errors path="username" class="help-inline"/>
+                        </div>
                     </div>
                     <div class="form-group">
                         <i class="fa fa-lock fa-lg"></i>
-                        <input class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="8"/>
+                        <form:input path="password" class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="20"/>
+                        <div class="has-error">
+                            <form:errors path="password" class="help-inline"/>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="checkbox">
@@ -57,7 +65,7 @@
                         </label>
                     </div>
                     <div class="form-group col-md-offset-9">
-                        <a href="./my"><button type="submit" class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc" name="submit">登录</button></a>
+                        <a href="./tologin"><button type="submit" class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc" name="submit">登录</button></a>
                     </div>
                     <br>
                     <div class="form-group col-md-offset-9">
@@ -70,6 +78,7 @@
             </div>
         </div>
     </div>
+    </form:form>
 </div>
 
 <jsp:include page="include/footer.jsp" />

@@ -7,6 +7,11 @@
     <groupId>groupId</groupId>
     <artifactId>ResumeWebsite</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <javax.validation.version>1.1.0.Final</javax.validation.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -21,6 +26,7 @@
     </build>
 
     <dependencies>
+        <!-- JSTL dependencies-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -31,6 +37,13 @@
                     <artifactId>jsp-api</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- jsr303 validation dependencies-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
         </dependency>
     </dependencies>
 
