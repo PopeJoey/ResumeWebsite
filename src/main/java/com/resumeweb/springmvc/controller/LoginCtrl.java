@@ -42,6 +42,9 @@ public class LoginCtrl {
             System.out.println(model.get("currentUser"));
             return "redirect:/homepage";
         }
+        else {
+            model.addAttribute("returnInfo","用户名或密码错误，请重试");
+        }
         return "login";
     }
 }
