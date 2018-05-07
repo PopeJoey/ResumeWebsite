@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,8 +35,9 @@
 <body>
 
 <jsp:include page="include/header.jsp" />
-
+<jsp:useBean id="User" class="com.resumeweb.entity.User" />
 <div class="container" background="images/1.jpg">
+    <form:form modelAttribute="User" action="./toRegister" method="post">
     <div class="form row">
         <div class="form-horizontal" id="login_form">
             <br>
@@ -43,19 +45,19 @@
                 <div class="col-md-10">
                     <div class="form-group" style="margin-bottom: 0px">
                         <i class="fa fa-user fa-lg"></i>
-                        <input class="form-control required" type="text" placeholder="账号" id="username" name="username" autofocus="autofocus" maxlength="20"/>
+                        <form:input path="userAccount" class="form-control required" type="text" placeholder="账号" id="username" name="username" autofocus="autofocus" maxlength="20"/>
                     </div>
                     <div class="form-group" style="margin-bottom: 0px">
                         <i class="fa fa-user fa-lg"></i>
-                        <input class="form-control required" type="text" placeholder="邮箱" id="email" name="username" autofocus="autofocus" maxlength="20"/>
+                        <form:input path="email" class="form-control required" type="text" placeholder="邮箱" id="email" name="email" autofocus="autofocus" maxlength="20"/>
                     </div>
                     <div class="form-group" style="margin-bottom: 0px">
                         <i class="fa fa-lock fa-lg"></i>
-                        <input class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="8"/>
+                        <form:input path="password" class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="20"/>
                     </div>
                     <div class="form-group" style="margin-bottom: 30px">
                         <i class="fa fa-lock fa-lg"></i>
-                        <input class="form-control required" type="password" placeholder="确认密码" id="identifyPassword" name="password" maxlength="8"/>
+                        <input class="form-control required" type="password" placeholder="确认密码" id="identifyPassword" maxlength="20"/>
                     </div>
                     <div class="form-group col-md-offset-9">
                         <button type="submit" class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc" name="submit">注册</button>
@@ -65,6 +67,7 @@
             </div>
         </div>
     </div>
+    </form:form>
 </div>
 
 <jsp:include page="include/footer.jsp" />
