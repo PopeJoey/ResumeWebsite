@@ -4,27 +4,32 @@ import com.resumeweb.DAO.userDaoImp;
 import com.resumeweb.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.resumeweb.DAO.userDao;
 
 @Service
 public class LogAndRegisterService {
-    private com.resumeweb.DAO.userDaoImp userDaoImp;
+    private userDao userDao;
     @Autowired
-    public void setUserDaoImp(userDaoImp userDaoImp){
-        this.userDaoImp=userDaoImp;
+    public void setUserDao(userDao userDao){
+        this.userDao=userDao;
     }
     public boolean register(User User){
-        if (userDaoImp.existUser(User.getUserAccount())){
+        if (userDao.existUser(User.getUserAccount())){
             return false;
         }else {
-            userDaoImp.addUser(User);
+            userDao.addUser(User);
             return true;
         }
     }
     public boolean logIn(String account,String password){
-        if (userDaoImp.existUser(account)&&userDaoImp.getPassword(account).equals(password)){
+        if (userDao.existUser(account)&&userDao.getPassword(account).equals(password)){
            return true;
         }
         return false;
+    }
+
+    public int getUserId(String account){
+        return userDao.getUserId(account);
     }
 
 }

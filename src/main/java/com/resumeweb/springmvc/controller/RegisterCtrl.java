@@ -1,6 +1,7 @@
 package com.resumeweb.springmvc.controller;
 
-import com.resumeweb.entity.UserSession;
+import com.resumeweb.entity.User;
+import com.resumeweb.service.LogAndRegisterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -16,11 +17,20 @@ public class RegisterCtrl {
     @RequestMapping("/register")
     public String showRegister(Model model){
         model.addAttribute("title","注册");
+        model.addAttribute("User",new User());
         return "register";
     }
 
     @RequestMapping("/toRegister")
-    public String register(@Valid UserSession userSession, BindingResult result, ModelMap model){
-
+    public String register(@Valid User user, BindingResult result, ModelMap model){
+        if(result.hasErrors()) {
+            return "register";
+        }
+        LogAndRegisterService service = new LogAndRegisterService();
+        if(service.register(user)){
+            model.addAttribute("currentUser",service.getUserId(user.getUserAccount()));
+            return "redirect:/homepage";
+        }
+        return "register";
     }
 }
