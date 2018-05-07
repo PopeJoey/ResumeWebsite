@@ -35,8 +35,11 @@
     <bean id="resumeDao" class="com.resumeweb.DAO.imp.resumeDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    <bean id="resumeEdusImp" class="com.resumeweb.DAO.imp.ResumeEdusDaoImp">
+    <bean id="resumeEdusDao" class="com.resumeweb.DAO.imp.ResumeEdusDaoImp">
         <property name="dataSource" ref="datasource"/>
+    </bean>
+    <bean id="patternDao" class="com.resumeweb.DAO.imp.PatternDaoImp">
+        <property name="dataSource" ref="datasource" />
     </bean>
 
     <bean id="logAndRegisterService" class="com.resumeweb.service.imp.LogAndRegisterServiceImp">

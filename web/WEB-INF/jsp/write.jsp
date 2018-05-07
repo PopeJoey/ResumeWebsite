@@ -18,6 +18,7 @@
 <div class="contact">
     <div class="container">
         <div class="contact_bottom">
+            <jsp:useBean id="currentResume" class="com.resumeweb.entity.Resume" scope="request" />
             <form:form modelAttribute="currentResume"  method="post" action="../../addResume/0" >
                 <div class="form row">
                     <div class="contact-to">

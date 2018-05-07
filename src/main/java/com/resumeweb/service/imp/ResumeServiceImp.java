@@ -1,9 +1,13 @@
 package com.resumeweb.service.imp;
 
+import com.resumeweb.DAO.PatternDao;
 import com.resumeweb.DAO.ResumeDao;
+import com.resumeweb.entity.Pattern;
 import com.resumeweb.entity.Resume;
 import com.resumeweb.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +21,15 @@ public class ResumeServiceImp implements ResumeService{
     }
     //
     public Map<Integer,String> getPatternList(){
-        return new HashMap<Integer, String>();
+        WebApplicationContext context =
+                ContextLoader.getCurrentWebApplicationContext();
+        PatternDao patternDao = (PatternDao)context.getBean("patternDao");
+        List<Pattern> patterns = patternDao.getPatternList();
+        Map<Integer,String> result = new HashMap<Integer, String>();
+        for(Pattern pattern:patterns){
+            result.put(pattern.getPatternId(),pattern.getPatternName());
+        }
+        return result;
     }
 
     @Override

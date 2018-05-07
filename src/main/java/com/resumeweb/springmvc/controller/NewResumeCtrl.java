@@ -18,7 +18,6 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.Map;
 
-@SessionAttributes("currentResume")
 @Controller
 public class NewResumeCtrl {
     public static ApplicationContext context;
@@ -50,6 +49,8 @@ public class NewResumeCtrl {
             int stepCount = Integer.parseInt(step);
             model.addAttribute("title","新建简历");
             model.addAttribute("page_id","3");
+            Resume currentResume = (Resume)session.getAttribute("currentResume");
+            System.out.println(currentResume.toString());
             return stepList[stepCount];
         }catch (NumberFormatException e){
             return redirectRoot(request);
@@ -74,8 +75,6 @@ public class NewResumeCtrl {
         currentResume.setUserId(userid);
         session.setAttribute("currentResume",currentResume);
 
-        System.out.println(currentResume.toString());
-
         return "redirect:/new/step/1";
     }
 
@@ -96,8 +95,8 @@ public class NewResumeCtrl {
         if(currentResume == null){
             return "redirect:/new/step/0";
         }
+        baseInfo.setUserId(userid);
         currentResume.setBaseInfo(baseInfo);
-        System.out.println(currentResume.toString());
         return "redirect:/new/step/2";
     }
 
@@ -105,7 +104,6 @@ public class NewResumeCtrl {
     @RequestMapping("/addResume/2")
     public @ResponseBody String addEduInfo(@Valid EduInfo eduInfo,
                                            BindingResult result,
-                                           ModelMap model,
                                            HttpSession session){
         Integer userid = (Integer) session.getAttribute("currentUser");
         if(userid == null || userid < 0){
