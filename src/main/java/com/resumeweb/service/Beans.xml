@@ -19,6 +19,24 @@
     <bean id="userDaoImp" class="com.resumeweb.DAO.userDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
+    <bean id="base_infoDaoImp" class="com.resumeweb.DAO.base_infoDaoImp">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+    <bean id="edu_infoDaoImp" class="com.resumeweb.DAO.edu_infoDaoImp">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+    <bean id="project_infoDaoImp" class="com.resumeweb.DAO.project_infoDaoImp">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+    <bean id="resume_projectsImp" class="com.resumeweb.DAO.project_infoDaoImp">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+    <bean id="resumeDaoImp" class="com.resumeweb.DAO.resumeDaoImp">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+    <bean id="resume_edusImp" class="com.resumeweb.DAO.resume_edusImp">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
     <bean id="LogAndRegisterService" class="com.resumeweb.service.LogAndRegisterService">
         <property name="userDaoImp" ref="userDaoImp"/>
     </bean>
