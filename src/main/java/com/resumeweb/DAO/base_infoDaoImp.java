@@ -1,4 +1,4 @@
-package com.resumeweb.service;
+package com.resumeweb.DAO;
 
 import com.resumeweb.entity.BaseInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class base_infoDaoImp implements base_infoDao {
         String sql="INSERT INTO base_info(user_id, name, gender, birth_date, " +
                 "highest_edu, phone_number, country, image_path, id_number," +
                 " marriage_status, ethnic_group, email, simple_introduction) " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,)";
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplateObject.update(sql,baseInfo.getUserId(),baseInfo.getName(),baseInfo.getGender(),baseInfo.getBirthDate()
         ,baseInfo.getHighestEdu(),baseInfo.getPhoneNumber(),baseInfo.getCountry(),baseInfo.getImagePath(),baseInfo.getIdNumber()
         ,baseInfo.getMarriageStatus(),baseInfo.getEthnicGroup(),baseInfo.getEmail(),baseInfo.getSimpleIntroduction()
