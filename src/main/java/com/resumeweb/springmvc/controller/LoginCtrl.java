@@ -30,16 +30,13 @@ public class LoginCtrl {
 
     @RequestMapping(value = "/tologin",method = RequestMethod.POST)
     public String login(@Valid UserSession userSession, BindingResult result, ModelMap model){
-        System.out.println(userSession.toString());
         if(result.hasErrors()) {
             return "login";
         }
-        System.out.println(userSession.toString());
 
         LogAndRegisterService service = (LogAndRegisterService)context.getBean("logAndRegisterService");
         if(service.logIn(userSession.getUsername(),userSession.getPassword())){
             model.addAttribute("currentUser",service.getUserId(userSession.getUsername()));
-            System.out.println(model.get("currentUser"));
             return "redirect:/homepage";
         }
         else {

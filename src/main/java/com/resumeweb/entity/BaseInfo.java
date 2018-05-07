@@ -1,20 +1,20 @@
 package com.resumeweb.entity;
 
 public class BaseInfo {
-    int baseInfoId;
-    int userId;
-    String name;
-    String gender;
-    String birthDate;
-    String highestEdu;
-    String phoneNumber;
-    String country;
-    String imagePath;
-    String idNumber;
-    String marriageStatus;
-    String ethnicGroup;
-    String email;
-    String simpleIntroduction;
+    private int baseInfoId;
+    private int userId;
+    private String name;
+    private String gender;
+    private String birthDate;
+    private String highestEdu;
+    private String phoneNumber;
+    private String country;
+    private String imagePath;
+    private String idNumber;
+    private String marriageStatus;
+    private String ethnicGroup;
+    private String email;
+    private String simpleIntroduction;
 
     public int getBaseInfoId() {
         return baseInfoId;
@@ -126,5 +126,17 @@ public class BaseInfo {
 
     public void setSimpleIntroduction(String simpleIntroduction) {
         this.simpleIntroduction = simpleIntroduction;
+    }
+
+    @Override
+    public String toString(){
+        return "{'baseInfoId':" + baseInfoId + ", 'userId':" + userId
+                + ", 'name':" + name + ", 'gender':" + gender
+                + ", 'birthDate':" + birthDate + ", 'highestEdu':" + highestEdu
+                + ", 'phoneNumber':" + phoneNumber + ", 'country':" + country
+                + ", 'imagePath':" + imagePath + ", 'idNumber':" + idNumber
+                + ", 'marriageStatus':" + marriageStatus + ", 'ethnicGroup':" + ethnicGroup
+                + ", 'email':" + email + ", 'simpleIntroduction':" + simpleIntroduction
+                + "}";
     }
 }

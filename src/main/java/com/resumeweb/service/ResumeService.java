@@ -19,4 +19,10 @@ public interface ResumeService {
      */
     public List<Resume> getResumeList(int userId);
 
+    /**
+     * 增加新的简历
+     * @param resume 简历对象
+     */
+    public void addNewResume(Resume resume);
+
 }

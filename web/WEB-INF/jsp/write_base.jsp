@@ -21,9 +21,9 @@
         }
 	</script>
 </head>
+<body>
 
     <jsp:include page="include/header.jsp" />
-    <jsp:useBean id="resume" class="com.resumeweb.entity.Resume" scope="session" />
     <div class="about">
         <div class="container">
             <section class="title-section">
@@ -34,29 +34,28 @@
     <div class="contact">
         <div class="container">
             <div class="contact_bottom">
-                <form:form method="post" action="./addResumeStep1" modelAttribute="resume">
+                <jsp:useBean id="BaseInfo" class="com.resumeweb.entity.BaseInfo" scope="request">
+                    <jsp:setProperty name="BaseInfo" property="userId" value="${sessionScope.currentUser}"/>
+                </jsp:useBean>
+                <form:form modelAttribute="BaseInfo" method="post" action="../../addResume/1">
                     <div class="contact-to" style="clear:both;">
-                        <form:select path="patternId" class="form-control" style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;">
-                            <form:options items="${patternList}" />
-                        </form:select>
+                        <form:input path="name" type="text" class="text" value="Name" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}" />
+                        <form:input path="birthDate" type="text" class="text" value="BirthDay" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Age';}" style="margin-left: 10px" />
+                        <form:input path="phoneNumber" type="text" class="text" value="Phone Number" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Phone Number';}" style="margin-left: 10px" />
                     </div>
                     <div class="contact-to" style="clear:both;">
-                        <form:input path="" type="text" class="text" value="Name" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}" />
-                        <input type="text" class="text" value="Age" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Age';}" style="margin-left: 10px">
-                        <input type="text" class="text" value="Phone Number" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Phone Number';}" style="margin-left: 10px">
-                    </div>
-                    <div class="contact-to" style="clear:both;">
-                        <input type="text" class="text" value="Address" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Address';}">
-                        <input type="text" class="text" value="Email" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}" style="margin-left: 10px">
-                        <select class="form-control" onkeydown="Select.del(this,event)" onkeypress="Select.write(this,event)" style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;margin-left: 10px">
+                        <form:input path="country" type="text" class="text" value="Country" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Address';}" />
+                        <form:input path="email" type="email" class="text" value="Email" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}"/>
+                        <form:select path="gender" class="form-control" onkeydown="Select.del(this,event)" onkeypress="Select.write(this,event)" style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;margin-left: 10px">
                             <option>男</option>
                             <option>女</option>
-                        </select>
+                        </form:select>
                     </div>
                     <div class="text2">
-                        <textarea value="Self-instroduction:" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Brief self-instroduction';}">Brief self-instroduction</textarea>
+                        <form:textarea path="simpleIntroduction" value="Self-instroduction:" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Brief self-instroduction';}" />
                     </div>
-                    <div> <a href="./2" class="submit">下一步</a> </div>
+                    <button type="submit" class="btn btn-success">保存并转到下一步</button>
+                    <div> <a class="submit">下一步</a> </div>
                 </form:form>
             </div>
         </div>

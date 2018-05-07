@@ -31,6 +31,6 @@ public class MyResumeCtrl {
             return "myresume";
         }
 
-        return "login";
+        return "redirect:/login";
     }
 }

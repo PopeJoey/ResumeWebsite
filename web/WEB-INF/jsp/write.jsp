@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -10,29 +11,34 @@
 <div class="about">
     <div class="container">
         <section class="title-section">
-            <h1 class="title-header">填写内容</h1>
+            <h1 class="title-header">模板基本信息</h1>
         </section>
     </div>
 </div>
 <div class="contact">
     <div class="container">
         <div class="contact_bottom">
-            <form method="post" action="contact-post.html">
-                <div class="contact-to">
-                    <input type="text" class="text" value="Name" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}">
-                    <input type="text" class="text" value="Gender" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}" style="margin-left: 10px">
-                    <input type="text" class="text" value="Age" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Subject';}" style="margin-left: 10px">
+            <form:form modelAttribute="currentResume"  method="post" action="../../addResume/0" >
+                <div class="form row">
+                    <div class="contact-to">
+                        <form:input path="resumeName" name="resumeName" id="resumeName" type="text" class="text" value="Resume Name"
+                                    onFocus="if (this.value == 'Resume Name'){this.value = '';}"
+                                    onBlur="if (this.value == '') {this.value = 'Resume Name';}" />
+                    </div>
+                    <div class="contact-to" style="clear:both;">
+                        <form:select path="patternId" name="patternId" id="patternId" class="form-control"
+                                     style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;
+                                     color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;">
+                            <form:options items="${patternList}" />
+                        </form:select>
+                    </div>
+                    <div class="submit">
+                        <button type="submit" class="btn btn-success">保存信息</button>
+                    </div>
+
+                    <div> <a href="javascript:void(0)" class="submit">下一步</a> </div>
                 </div>
-                <div class="contact-to">
-                    <input type="text" class="text" value="University and Major" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}">
-                    <input type="text" class="text" value="Phone Number" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}" style="margin-left: 10px">
-                    <input type="text" class="text" value="Email Address" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Subject';}" style="margin-left: 10px">
-                </div>
-                <div class="text2">
-                    <textarea value="Experience:" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Message';}">Message..</textarea>
-                </div>
-                <div> <a href="#" class="submit">下一步</a> </div>
-            </form>
+            </form:form>
         </div>
     </div>
 </div>

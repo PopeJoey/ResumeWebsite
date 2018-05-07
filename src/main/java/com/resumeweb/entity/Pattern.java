@@ -1,12 +1,12 @@
 package com.resumeweb.entity;
 
 public class Pattern {
-    int patternId;
-    String patternName;
-    String patternPath;
-    String patternClass;
-    String patternPreviewPic;
-    String patternInfo;
+    private int patternId;
+    private String patternName;
+    private String patternPath;
+    private String patternClass;
+    private String patternPreviewPic;
+    private String patternInfo;
 
     public int getPatternId() {
         return patternId;

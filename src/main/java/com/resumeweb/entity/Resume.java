@@ -1,17 +1,16 @@
 package com.resumeweb.entity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Resume {
-    int resumeId;
-    String resumeName;
-    int userId;
+    private int resumeId;
+    private String resumeName;
+    private int userId;
 
-    int patternId;
-    BaseInfo baseInfo;
-    ArrayList<EduInfo> educations;
-    ArrayList<ProjectInfo> projects;
+    private int patternId;
+    private BaseInfo baseInfo;
+    private ArrayList<EduInfo> educations;
+    private ArrayList<ProjectInfo> projects;
 
     public int getResumeId() {
         return resumeId;
@@ -67,5 +66,13 @@ public class Resume {
 
     public void setPatternId(int patternId) {
         this.patternId = patternId;
+    }
+
+    @Override
+    public String toString(){
+        return "{'resumeId':" + resumeId + ", 'resumeName':" + resumeName
+                +     ", 'userId':" + userId + ", 'patternId':" + patternId
+                +     ", 'baseInfo':" + (baseInfo==null?null:baseInfo.toString())
+                +     "}";
     }
 }

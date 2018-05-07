@@ -3,14 +3,14 @@ package com.resumeweb.entity;
 import java.sql.Date;
 
 public class EduInfo {
-    int eduInfoId;
-    int userId;
-    Date startDate;
-    Date endDate;
-    String school;
-    String major;
-    String edu;
-    String rank;
+    private int eduInfoId;
+    private int userId;
+    private Date startDate;
+    private Date endDate;
+    private String school;
+    private String major;
+    private String edu;
+    private String rank;
 
     public int getEduInfoId() {
         return eduInfoId;

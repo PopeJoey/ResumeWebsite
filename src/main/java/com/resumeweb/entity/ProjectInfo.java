@@ -3,13 +3,13 @@ package com.resumeweb.entity;
 import java.sql.Date;
 
 public class ProjectInfo {
-    int projectInfoId;
-    int userId;
-    String proOrIntern;
-    String projectName;
-    Date startDate;
-    Date endDate;
-    String description;
+    private int projectInfoId;
+    private int userId;
+    private String proOrIntern;
+    private String projectName;
+    private Date startDate;
+    private Date endDate;
+    private String description;
 
     public int getProjectInfoId() {
         return projectInfoId;
