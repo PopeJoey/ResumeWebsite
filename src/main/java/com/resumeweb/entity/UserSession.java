@@ -5,10 +5,10 @@ import java.io.Serializable;
 
 //session中保存用户状态的类
 public class UserSession implements Serializable {
-    @Size(min = 6,max = 20)
+    @Size(min = 3,max = 20)
     private String username;
 
-    @Size(min = 6,max = 20)
+    @Size(min = 3,max = 20)
     private String password;
 
     public UserSession(){}

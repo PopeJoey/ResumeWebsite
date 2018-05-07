@@ -48,7 +48,7 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public boolean existUser(String user_account) {
-        String sql="SELECT * FROM user WHERE user_account=?";
+        String sql="SELECT password FROM user WHERE user_account=?";
         try{
             String password= jdbcTemplateObject.queryForObject(sql,new Object[]{user_account},String.class
             );

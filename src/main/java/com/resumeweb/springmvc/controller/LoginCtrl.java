@@ -20,21 +20,23 @@ public class LoginCtrl {
     @RequestMapping("/login")
     public String showLogin(ModelMap model){
         model.addAttribute("title","登录");
-        model.addAttribute("UserSession",new UserSession());
         return "login";
     }
 
     @RequestMapping(value = "/tologin",method = RequestMethod.POST)
     public String login(@Valid UserSession userSession, BindingResult result, ModelMap model){
+        System.out.println(userSession.toString());
         if(result.hasErrors()) {
             return "login";
         }
+        System.out.println(userSession.toString());
         ApplicationContext context =
-                new ClassPathXmlApplicationContext("main/resources/Beans.xml");
+                new ClassPathXmlApplicationContext("Beans.xml");
 
         LogAndRegisterService service = (LogAndRegisterService)context.getBean("LogAndRegisterService");
         if(service.logIn(userSession.getUsername(),userSession.getPassword())){
             model.addAttribute("currentUser",service.getUserId(userSession.getUsername()));
+            System.out.println(model.get("currentUser"));
             return "redirect:/homepage";
         }
         return "login";

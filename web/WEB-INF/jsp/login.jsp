@@ -35,6 +35,7 @@
 <jsp:include page="include/header.jsp" />
 
 <div class="container" >
+    <jsp:useBean id="UserSession" class="com.resumeweb.entity.UserSession" scope="request" />
     <form:form method="post" modelAttribute="UserSession" action="./tologin">
     <div class="form row">
         <div class="form-horizontal" id="login_form">
