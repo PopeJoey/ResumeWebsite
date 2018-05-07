@@ -1,5 +1,6 @@
-package com.resumeweb.service;
+package com.resumeweb.DAO;
 
+import com.resumeweb.DAO.edu_infoDao;
 import com.resumeweb.entity.EduInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,7 +34,7 @@ public class edu_infoDaoImp implements edu_infoDao {
 
     @Override
     public void updateEduInfo(EduInfo eduInfo) {
-        String sql="UPDATE edu_info set user_id=?,start_date?,end_date=?" +
+        String sql="UPDATE edu_info set user_id=?,start_date=?,end_date=?" +
                 ",school=?,major=?,edu=?,rank=?";
         jdbcTemplateObject.update(sql,eduInfo.getUserId(),eduInfo.getStartDate()
                 ,eduInfo.getEndDate(),eduInfo.getSchool(),eduInfo.getMajor(),eduInfo.getEdu()

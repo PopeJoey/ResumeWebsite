@@ -1,4 +1,4 @@
-package  com.resumeweb.service;
+package com.resumeweb.DAO;
 import com.resumeweb.entity.User;
 import javax.sql.DataSource;
 

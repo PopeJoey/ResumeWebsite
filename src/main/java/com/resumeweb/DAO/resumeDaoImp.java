@@ -1,4 +1,4 @@
-package com.resumeweb.service;
+package com.resumeweb.DAO;
 
 import com.resumeweb.entity.Resume;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,12 +1,13 @@
 package com.resumeweb.service;
 
+import com.resumeweb.DAO.userDaoImp;
 import com.resumeweb.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LogAndRegisterService {
-    private userDaoImp userDaoImp;
+    private com.resumeweb.DAO.userDaoImp userDaoImp;
     @Autowired
     public void setUserDaoImp(userDaoImp userDaoImp){
         this.userDaoImp=userDaoImp;

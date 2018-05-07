@@ -16,7 +16,7 @@
         <property name="username" value="resumeroot"/>
         <property name="password" value="helloworld"/>
     </bean>
-    <bean id="userDaoImp" class="com.resumeweb.service.userDaoImp">
+    <bean id="userDaoImp" class="com.resumeweb.DAO.userDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
     <bean id="LogAndRegisterService" class="com.resumeweb.service.LogAndRegisterService">
