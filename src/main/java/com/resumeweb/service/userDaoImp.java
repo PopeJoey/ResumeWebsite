@@ -59,4 +59,11 @@ public class userDaoImp implements userDao {
 
         return true;
     }
+
+    @Override
+    public int getUserId(String account) {
+        String sql="SELECT user_id FROM user WHERE user_account=?";
+        int user_id= jdbcTemplateObject.queryForObject(sql,new Object[]{account},Integer.class);
+        return user_id;
+    }
 }

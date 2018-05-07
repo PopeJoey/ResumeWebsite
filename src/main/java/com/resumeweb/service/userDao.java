@@ -9,4 +9,5 @@ public interface userDao {
     public void updateUser(User u);
     public String getPassword(String user_account);
     public boolean existUser(String user_account);
+    public int getUserId(String account);
 }
