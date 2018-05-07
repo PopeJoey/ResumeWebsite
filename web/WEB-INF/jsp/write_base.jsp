@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -22,7 +23,7 @@
 </head>
 
     <jsp:include page="include/header.jsp" />
-
+    <jsp:useBean id="resume" class="com.resumeweb.entity.Resume" scope="session" />
     <div class="about">
         <div class="container">
             <section class="title-section">
@@ -33,15 +34,14 @@
     <div class="contact">
         <div class="container">
             <div class="contact_bottom">
-                <form method="post" action="contact-post.html">
+                <form:form method="post" action="./addResumeStep1" modelAttribute="resume">
                     <div class="contact-to" style="clear:both;">
-                        <select class="form-control" style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;">
-                            <option>简约模板</option>
-                            <option>正式模板</option>
-                        </select>
+                        <form:select path="patternId" class="form-control" style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;">
+                            <form:options items="${patternList}" />
+                        </form:select>
                     </div>
                     <div class="contact-to" style="clear:both;">
-                        <input type="text" class="text" value="Name" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}">
+                        <form:input path="" type="text" class="text" value="Name" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}" />
                         <input type="text" class="text" value="Age" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Age';}" style="margin-left: 10px">
                         <input type="text" class="text" value="Phone Number" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Phone Number';}" style="margin-left: 10px">
                     </div>
@@ -57,7 +57,7 @@
                         <textarea value="Self-instroduction:" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Brief self-instroduction';}">Brief self-instroduction</textarea>
                     </div>
                     <div> <a href="./2" class="submit">下一步</a> </div>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>

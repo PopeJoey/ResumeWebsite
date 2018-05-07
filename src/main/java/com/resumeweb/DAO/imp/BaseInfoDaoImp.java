@@ -1,5 +1,6 @@
-package com.resumeweb.DAO;
+package com.resumeweb.DAO.imp;
 
+import com.resumeweb.DAO.BaseInfoDao;
 import com.resumeweb.entity.BaseInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,10 +11,10 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 @Repository
-public class base_infoDaoImp implements base_infoDao {
+public class BaseInfoDaoImp implements BaseInfoDao {
     private JdbcTemplate jdbcTemplateObject;
 
-    public base_infoDaoImp() {
+    public BaseInfoDaoImp() {
     }
 
     @Autowired

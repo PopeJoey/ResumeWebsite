@@ -8,7 +8,7 @@ public class Resume {
     String resumeName;
     int userId;
 
-    Pattern pattern;
+    int patternId;
     BaseInfo baseInfo;
     ArrayList<EduInfo> educations;
     ArrayList<ProjectInfo> projects;
@@ -37,14 +37,6 @@ public class Resume {
         this.userId = userId;
     }
 
-    public Pattern getPattern() {
-        return pattern;
-    }
-
-    public void setPattern(Pattern pattern) {
-        this.pattern = pattern;
-    }
-
     public BaseInfo getBaseInfo() {
         return baseInfo;
     }
@@ -67,5 +59,13 @@ public class Resume {
 
     public void setProjects(ArrayList<ProjectInfo> projects) {
         this.projects = projects;
+    }
+
+    public int getPatternId() {
+        return patternId;
+    }
+
+    public void setPatternId(int patternId) {
+        this.patternId = patternId;
     }
 }

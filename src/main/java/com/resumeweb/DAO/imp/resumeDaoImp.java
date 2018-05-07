@@ -1,5 +1,6 @@
-package com.resumeweb.DAO;
+package com.resumeweb.DAO.imp;
 
+import com.resumeweb.DAO.ResumeDao;
 import com.resumeweb.entity.Resume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 @Repository
-public class resumeDaoImp implements resumeDao {
+public class resumeDaoImp implements ResumeDao {
     private JdbcTemplate jdbcTemplateObject;
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -17,7 +18,7 @@ public class resumeDaoImp implements resumeDao {
     public void addResume(Resume resume) {
         String sql="INSERT INTO resume(resume_name, user_id, pattern_id, base_info_id) VALUES (?,?,?,?)";
         jdbcTemplateObject.update(sql,resume.getResumeName(),resume.getUserId()
-        ,resume.getPattern().getPatternId(),resume.getBaseInfo().getBaseInfoId());
+        ,resume.getPatternId(),resume.getBaseInfo().getBaseInfoId());
     }
 
     @Override
@@ -29,7 +30,7 @@ public class resumeDaoImp implements resumeDao {
     public void updateResume(Resume resume) {
         String sql="UPDATE resume SET resume_id=?,user_id=?,pattern_id=?,base_info_id=?";
         jdbcTemplateObject.update(sql,resume.getResumeName(),resume.getUserId()
-        ,resume.getPattern().getPatternId(),resume.getBaseInfo().getBaseInfoId());
+        ,resume.getPatternId(),resume.getBaseInfo().getBaseInfoId());
     }
 
     @Override

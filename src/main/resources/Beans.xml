@@ -16,29 +16,33 @@
         <property name="username" value="resumeroot"/>
         <property name="password" value="helloworld"/>
     </bean>
-    <bean id="userDaoImp" class="com.resumeweb.DAO.UserDaoImp">
+
+    <bean id="userDao" class="com.resumeweb.DAO.imp.UserDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    <bean id="base_infoDaoImp" class="com.resumeweb.DAO.base_infoDaoImp">
+    <bean id="baseInfoDao" class="com.resumeweb.DAO.imp.BaseInfoDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    <bean id="edu_infoDaoImp" class="com.resumeweb.DAO.edu_infoDaoImp">
+    <bean id="eduInfoDao" class="com.resumeweb.DAO.imp.EduInfoDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    <bean id="project_infoDaoImp" class="com.resumeweb.DAO.project_infoDaoImp">
+    <bean id="projectInfoDao" class="com.resumeweb.DAO.imp.ProjectInfoDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    <bean id="resume_projectsImp" class="com.resumeweb.DAO.project_infoDaoImp">
+    <bean id="resumeProjectsDao" class="com.resumeweb.DAO.imp.ResumeProjectsDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    <bean id="resumeDaoImp" class="com.resumeweb.DAO.resumeDaoImp">
+    <bean id="resumeDao" class="com.resumeweb.DAO.imp.resumeDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    <bean id="resume_edusImp" class="com.resumeweb.DAO.resume_edusImp">
+    <bean id="resumeEdusImp" class="com.resumeweb.DAO.imp.ResumeEdusDaoImp">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    <bean id="LogAndRegisterService" class="com.resumeweb.service.LogAndRegisterService">
-        <property name="userDao" ref="userDaoImp"/>
+
+    <bean id="logAndRegisterService" class="com.resumeweb.service.imp.LogAndRegisterServiceImp">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="resumeService" class="com.resumeweb.service.imp.ResumeServiceImp">
     </bean>
 
 

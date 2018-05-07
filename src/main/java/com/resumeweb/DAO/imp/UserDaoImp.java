@@ -1,5 +1,6 @@
-package com.resumeweb.DAO;
+package com.resumeweb.DAO.imp;
 
+import com.resumeweb.DAO.UserDao;
 import com.resumeweb.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

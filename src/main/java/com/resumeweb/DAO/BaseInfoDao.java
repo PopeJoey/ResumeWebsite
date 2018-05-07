@@ -2,7 +2,7 @@ package com.resumeweb.DAO;
 
 import com.resumeweb.entity.BaseInfo;
 
-public interface base_infoDao {
+public interface BaseInfoDao {
     public void addBaseInfo(BaseInfo baseInfo);
     public void updateBaseInfo(BaseInfo baseInfo);
     public void deleteBaseInfo(BaseInfo baseInfo);

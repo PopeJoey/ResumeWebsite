@@ -3,19 +3,24 @@ package com.resumeweb.springmvc.controller;
 import com.resumeweb.entity.UserSession;
 import com.resumeweb.service.LogAndRegisterService;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 
 import javax.validation.Valid;
 
 @SessionAttributes("currentUser")
 @Controller
 public class LoginCtrl {
+    public static ApplicationContext context;
+    static {
+        context = (WebApplicationContext) ContextLoader.getCurrentWebApplicationContext();
+    }
 
     @RequestMapping("/login")
     public String showLogin(ModelMap model){
@@ -30,10 +35,8 @@ public class LoginCtrl {
             return "login";
         }
         System.out.println(userSession.toString());
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("Beans.xml");
 
-        LogAndRegisterService service = (LogAndRegisterService)context.getBean("LogAndRegisterService");
+        LogAndRegisterService service = (LogAndRegisterService)context.getBean("logAndRegisterService");
         if(service.logIn(userSession.getUsername(),userSession.getPassword())){
             model.addAttribute("currentUser",service.getUserId(userSession.getUsername()));
             System.out.println(model.get("currentUser"));

@@ -2,7 +2,7 @@ package com.resumeweb.DAO;
 
 import com.resumeweb.entity.Resume;
 
-public interface resumeDao {
+public interface ResumeDao {
     void addResume(Resume resume);
     void deleteResume(Resume resume);
     void updateResume(Resume resume);

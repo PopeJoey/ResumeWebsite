@@ -1,5 +1,6 @@
-package com.resumeweb.DAO;
+package com.resumeweb.DAO.imp;
 
+import com.resumeweb.DAO.ProjectInfoDao;
 import com.resumeweb.entity.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
-public class project_infoDaoImp implements project_infoDao {
+public class ProjectInfoDaoImp implements ProjectInfoDao {
     private JdbcTemplate jdbcTemplateObject;
 
     @Autowired
@@ -20,7 +21,7 @@ public class project_infoDaoImp implements project_infoDao {
     }
 
     @Override
-    public void addProject_info(ProjectInfo projectInfo) {
+    public void addProjectInfo(ProjectInfo projectInfo) {
         String sql="INSERT INTO project_info(user_id, pro_or_intern, " +
                 "project_name, start_date, end_date, description) VALUES (?,?,?,?,?,?)";
         jdbcTemplateObject.update(sql,projectInfo.getUserId(),projectInfo.getProOrIntern()
@@ -28,13 +29,13 @@ public class project_infoDaoImp implements project_infoDao {
     }
 
     @Override
-    public void deleteProject_info(ProjectInfo projectInfo) {
+    public void deleteProjectInfo(ProjectInfo projectInfo) {
         String sql="DELETE FROM project_info WHERE project_info_id=?";
         jdbcTemplateObject.update(sql,projectInfo.getProjectInfoId());
     }
 
     @Override
-    public void updateProject_info(ProjectInfo projectInfo) {
+    public void updateProjectInfo(ProjectInfo projectInfo) {
         String sql="UPDATE project_info SET user_id=?,pro_or_intern=?,project_name=?" +
                 ",start_date=?,end_date=?,description=?";
         jdbcTemplateObject.update(sql,projectInfo.getUserId(),projectInfo.getProOrIntern()

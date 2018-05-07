@@ -2,6 +2,7 @@ package com.resumeweb.entity;
 
 public class Pattern {
     int patternId;
+    String patternName;
     String patternPath;
     String patternClass;
     String patternPreviewPic;
@@ -45,5 +46,13 @@ public class Pattern {
 
     public void setPatternInfo(String patternInfo) {
         this.patternInfo = patternInfo;
+    }
+
+    public String getPatternName() {
+        return patternName;
+    }
+
+    public void setPatternName(String patternName) {
+        this.patternName = patternName;
     }
 }
