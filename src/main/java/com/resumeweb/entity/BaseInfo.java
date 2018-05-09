@@ -129,14 +129,37 @@ public class BaseInfo {
     }
 
     @Override
-    public String toString(){
-        return "{'baseInfoId':" + baseInfoId + ", 'userId':" + userId
-                + ", 'name':" + name + ", 'gender':" + gender
-                + ", 'birthDate':" + birthDate + ", 'highestEdu':" + highestEdu
-                + ", 'phoneNumber':" + phoneNumber + ", 'country':" + country
-                + ", 'imagePath':" + imagePath + ", 'idNumber':" + idNumber
-                + ", 'marriageStatus':" + marriageStatus + ", 'ethnicGroup':" + ethnicGroup
-                + ", 'email':" + email + ", 'simpleIntroduction':" + simpleIntroduction
-                + "}";
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"baseInfoId\":")
+                .append(baseInfoId);
+        sb.append(",\"userId\":")
+                .append(userId);
+        sb.append(",\"name\":\"")
+                .append(name).append('\"');
+        sb.append(",\"gender\":\"")
+                .append(gender).append('\"');
+        sb.append(",\"birthDate\":\"")
+                .append(birthDate).append('\"');
+        sb.append(",\"highestEdu\":\"")
+                .append(highestEdu).append('\"');
+        sb.append(",\"phoneNumber\":\"")
+                .append(phoneNumber).append('\"');
+        sb.append(",\"country\":\"")
+                .append(country).append('\"');
+        sb.append(",\"imagePath\":\"")
+                .append(imagePath).append('\"');
+        sb.append(",\"idNumber\":\"")
+                .append(idNumber).append('\"');
+        sb.append(",\"marriageStatus\":\"")
+                .append(marriageStatus).append('\"');
+        sb.append(",\"ethnicGroup\":\"")
+                .append(ethnicGroup).append('\"');
+        sb.append(",\"email\":\"")
+                .append(email).append('\"');
+        sb.append(",\"simpleIntroduction\":\"")
+                .append(simpleIntroduction).append('\"');
+        sb.append('}');
+        return sb.toString();
     }
 }

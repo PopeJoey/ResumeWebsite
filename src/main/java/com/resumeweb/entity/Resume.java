@@ -70,9 +70,30 @@ public class Resume {
 
     @Override
     public String toString(){
+        String eduStr = "[";
+        if(educations != null && educations.size() > 0) {
+            for (EduInfo info : educations) {
+                eduStr += info.toString();
+                eduStr += ", ";
+            }
+            eduStr = eduStr.substring(0, eduStr.length() - 2);
+        }
+        eduStr += "]";
+
+        String projectStr = "[";
+        if(projects != null && projects.size() > 0) {
+            for (ProjectInfo info : projects) {
+                projectStr += info.toString();
+                projectStr += ", ";
+            }
+            projectStr = projectStr.substring(0, projectStr.length() - 2);
+        }
+        projectStr += "]";
+
         return "{'resumeId':" + resumeId + ", 'resumeName':" + resumeName
                 +     ", 'userId':" + userId + ", 'patternId':" + patternId
                 +     ", 'baseInfo':" + (baseInfo==null?null:baseInfo.toString())
+                +     ", 'educations':" + eduStr + ", 'projects':" + projectStr
                 +     "}";
     }
 }

@@ -9,6 +9,7 @@ public class ProjectInfo {
     private String projectName;
     private Date startDate;
     private Date endDate;
+
     private String description;
 
     public int getProjectInfoId() {
@@ -65,6 +66,27 @@ public class ProjectInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"projectInfoId\":")
+                .append(projectInfoId);
+        sb.append(",\"userId\":")
+                .append(userId);
+        sb.append(",\"proOrIntern\":\"")
+                .append(proOrIntern).append('\"');
+        sb.append(",\"projectName\":\"")
+                .append(projectName).append('\"');
+        sb.append(",\"startDate\":\"")
+                .append(startDate).append('\"');
+        sb.append(",\"endDate\":\"")
+                .append(endDate).append('\"');
+        sb.append(",\"description\":\"")
+                .append(description).append('\"');
+        sb.append('}');
+        return sb.toString();
     }
 
 }

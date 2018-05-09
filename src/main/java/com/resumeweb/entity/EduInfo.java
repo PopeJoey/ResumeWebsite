@@ -75,4 +75,27 @@ public class EduInfo {
     public void setRank(String rank) {
         this.rank = rank;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"eduInfoId\":")
+                .append(eduInfoId);
+        sb.append(",\"userId\":")
+                .append(userId);
+        sb.append(",\"startDate\":\"")
+                .append(startDate).append('\"');
+        sb.append(",\"endDate\":\"")
+                .append(endDate).append('\"');
+        sb.append(",\"school\":\"")
+                .append(school).append('\"');
+        sb.append(",\"major\":\"")
+                .append(major).append('\"');
+        sb.append(",\"edu\":\"")
+                .append(edu).append('\"');
+        sb.append(",\"rank\":\"")
+                .append(rank).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }
