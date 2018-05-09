@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <jsp:include page="include/common_import.jsp" />
@@ -33,17 +34,19 @@
         </tr>
         </thead>
         <tbody>
+        <c:forEach var="resume" items="${ResumeList}" >
         <tr>
-            <td>01</td>
-            <td>个人风格</td>
+            <td>${resume.resumeId}</td>
+            <td>${resume.resumeName}</td>
             <td>
-                <a href="#" class="btn btn-default btn-sm">修改</a>
-                    <a href="#"  class="btn btn-default btn-sm">预览</a>
-                        <a href="#"  class="btn btn-default btn-sm">下载</a>
-                            <a href="#"  class="btn btn-default btn-sm">删除</a>
+                <a href="./modefyResume/${resume.resumeId}" class="btn btn-default btn-sm">修改</a>
+                <a href="./viewResume/${resume.resumeId}"  class="btn btn-default btn-sm">预览</a>
+                <a href="./downloadResume/${resume.resumeId}"  class="btn btn-default btn-sm">下载</a>
+                <a href="javascript:void(0)" onclick="deleteResume(${resume.resumeId})"  class="btn btn-default btn-sm">删除</a>
             </td>
 
         </tr>
+        </c:forEach>
         </tbody>
 
     </table>
