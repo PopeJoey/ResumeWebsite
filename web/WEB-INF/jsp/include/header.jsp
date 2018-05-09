@@ -10,8 +10,16 @@
 <div class="header">
     <div class="container">
         <div class="top">
-            <a href="./login">登录</a>
-            <a href="./register">注册</a>
+            <c:choose>
+                <c:when test="${sessionScope.currentUser > 0}" >
+                    Hello,${sessionScope.userName}
+                    <a href="./logout">注销</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="./login">登录</a>
+                    <a href="./register">注册</a>
+                </c:otherwise>
+            </c:choose>
         </div>
         <div class="logo"> <a href="./homepage"><img src="images/lg1.png" alt="resume"></a> </div>
         <div class="menu"> <a class="toggleMenu" href="#"><img src="images/nav_icon.png" alt="" /> </a>

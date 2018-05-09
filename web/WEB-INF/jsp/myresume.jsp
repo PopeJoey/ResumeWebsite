@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<a href="./new" >新建简历</a>
+<a href="./newResume" >新建简历</a>
 
 <div class="container" style="height:360px">
     <table class="table">

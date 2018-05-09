@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -19,10 +20,10 @@
     <div class="container">
         <div class="contact_bottom">
             <jsp:useBean id="currentResume" class="com.resumeweb.entity.Resume" scope="request" />
-            <form:form modelAttribute="currentResume"  method="post" action="../../addResume/0" >
+            <form:form modelAttribute="currentResume"  method="post" action="./newResume" >
                 <div class="form row">
                     <div class="contact-to">
-                        <form:input path="resumeName" name="resumeName" id="resumeName" type="text" class="text" value="Resume Name"
+                        <form:input path="resumeName" name="resumeName" id="resumeName" type="text" class="text" value="${sessionScope.currentResume.resumeName}" default='Resume Name'
                                     onFocus="if (this.value == 'Resume Name'){this.value = '';}"
                                     onBlur="if (this.value == '') {this.value = 'Resume Name';}" />
                     </div>
@@ -37,7 +38,7 @@
                         <button type="submit" class="btn btn-success">保存信息</button>
                     </div>
 
-                    <div> <a href="javascript:void(0)" class="submit">下一步</a> </div>
+                    <div> <a href="./previousStep" class="submit">上一步</a> </div>
                 </div>
             </form:form>
         </div>

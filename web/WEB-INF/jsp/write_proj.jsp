@@ -43,6 +43,7 @@
                     </div>
                 </form>
                 <button class="submit">添加</button>
+                <a href="./previousStep" class="submit">上一步</a>
             </div>
         </div>
     </div>

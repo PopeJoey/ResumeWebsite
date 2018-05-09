@@ -4,6 +4,7 @@ import com.resumeweb.entity.UserSession;
 import com.resumeweb.service.LogAndRegisterService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-@SessionAttributes("currentUser")
 @Controller
 public class LoginCtrl {
     public static ApplicationContext context;
@@ -29,19 +30,30 @@ public class LoginCtrl {
     }
 
     @RequestMapping(value = "/tologin",method = RequestMethod.POST)
-    public String login(@Valid UserSession userSession, BindingResult result, ModelMap model){
+    public String login(@Valid UserSession userSession,
+                        BindingResult result,
+                        HttpSession session,
+                        Model model){
         if(result.hasErrors()) {
-            return "login";
+            return "redirect:/login";
         }
 
         LogAndRegisterService service = (LogAndRegisterService)context.getBean("logAndRegisterService");
         if(service.logIn(userSession.getUsername(),userSession.getPassword())){
-            model.addAttribute("currentUser",service.getUserId(userSession.getUsername()));
+            session.setAttribute("currentUser",service.getUserId(userSession.getUsername()));
+            session.setAttribute("userName",userSession.getUsername());
             return "redirect:/homepage";
         }
         else {
             model.addAttribute("returnInfo","用户名或密码错误，请重试");
         }
-        return "login";
+        return "redirect:/login";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("currentUser");
+        session.removeAttribute("userName");
+        return "redirect:/homepage";
     }
 }

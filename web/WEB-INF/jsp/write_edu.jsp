@@ -30,7 +30,7 @@
                         <input type="text" class="text" value="End time" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'End time';}" style="margin-left: 30px">
                     </div>
 					<br><br><br><br><br>
-                    <div > <a href="./3" class="submit" style="margin-left: 30px">下一步</a> </div>
+                    <div > <a href="./previousStep" class="submit" style="margin-left: 30px">上一步</a> </div>
                 </form>
             </div>
         </div>

@@ -37,31 +37,35 @@
                 <jsp:useBean id="BaseInfo" class="com.resumeweb.entity.BaseInfo" scope="request">
                     <jsp:setProperty name="BaseInfo" property="userId" value="${sessionScope.currentUser}"/>
                 </jsp:useBean>
-                <form:form modelAttribute="BaseInfo" method="post" action="../../addResume/1">
+                <form:form modelAttribute="BaseInfo" method="post" action="./newResume">
                     <div class="contact-to" style="clear:both;">
-                        <form:input path="name" type="text" class="text" value="Name" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Name';}" />
-                        <form:input path="birthDate" type="text" class="text" value="BirthDay" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Age';}" style="margin-left: 10px" />
-                        <form:input path="phoneNumber" type="text" class="text" value="Phone Number" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Phone Number';}" style="margin-left: 10px" />
+                        <form:input path="name" type="text" class="text" value="${sessionScope.currentResume.baseInfo.name}" placeholder="Name" />
+                        <form:input path="birthDate" type="text" class="text" value="${sessionScope.currentResume.baseInfo.birthDate}" placeholder="BirthDay" />
+                        <form:input path="phoneNumber" type="text" class="text" value="${sessionScope.currentResume.baseInfo.phoneNumber}" placeholder="PhoneNumber" style="margin-left: 10px" />
                     </div>
                     <div class="contact-to" style="clear:both;">
-                        <form:input path="country" type="text" class="text" value="Country" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Address';}" />
-                        <form:input path="email" type="email" class="text" value="Email" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Email';}"/>
-                        <form:select path="gender" class="form-control" onkeydown="Select.del(this,event)" onkeypress="Select.write(this,event)" style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;margin-left: 10px">
+                        <form:input path="country" type="text" class="text" value="${sessionScope.currentResume.baseInfo.country}" placeholder="Country" />
+                        <form:input path="email" type="email" class="text" value="${sessionScope.currentResume.baseInfo.email}" placeholder="Email"/>
+                        <form:select path="gender" value="${sessionScope.currentResume.baseInfo.gender}"
+                                     class="form-control" onkeydown="Select.del(this,event)" onkeypress="Select.write(this,event)"
+                                     style="width: 32.5%;height:45px;margin: 10px 0;border: 1px solid #E1E2E2;color: #999;background: #FFF;float: left;outline: none;font-size: 0.85em;margin-left: 10px">
                             <option>男</option>
                             <option>女</option>
                         </form:select>
                     </div>
                     <div class="text2">
-                        <form:textarea path="simpleIntroduction" value="Self-instroduction:" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Brief self-instroduction';}" />
+                        <form:textarea path="simpleIntroduction" value="${sessionScope.currentResume.baseInfo.simpleIntroduction}" placeholder="Self-instroduction" />
                     </div>
                     <button type="submit" class="btn btn-success">保存并转到下一步</button>
-                    <div> <a class="submit">下一步</a> </div>
+                    <div> <a class="submit" href="./previousStep">上一步</a> </div>
                 </form:form>
             </div>
         </div>
     </div>
 
 <jsp:include page="include/footer.jsp" />
-
+<script type="text/javascript">
+    alert(${sessionScope.currentResume.baseInfo.simpleIntroduction});
+</script>
     </body>
 </html>
