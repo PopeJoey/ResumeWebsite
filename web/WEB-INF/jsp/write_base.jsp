@@ -64,8 +64,5 @@
     </div>
 
 <jsp:include page="include/footer.jsp" />
-<script type="text/javascript">
-    alert(${sessionScope.currentResume.baseInfo.simpleIntroduction});
-</script>
     </body>
 </html>

@@ -112,8 +112,27 @@ public class NewResumeCtrl {
         }
         inBaseInfo.setUserId(userid);
         currentResume.setBaseInfo(inBaseInfo);
+
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.inBaseInfo(currentResume);
+
         session.setAttribute("currentStep",2);
         return stepList[2];
+    }
+
+    //处理第三步并显示第四步
+    @RequestMapping("/newEduInfo")
+    public String showEduInfoPage(HttpSession session){
+        Integer userid = (Integer)session.getAttribute("currentUser");
+        if(userid == null || userid < 0){
+            return "redirect:/login";
+        }
+        Resume currentResume = (Resume)session.getAttribute("currentResume");
+        if(currentResume == null){
+            return "redirect:/newResume";
+        }
+        session.setAttribute("currentStep",3);
+        return stepList[3];
     }
 
 
@@ -159,6 +178,9 @@ public class NewResumeCtrl {
             temp.setProjectName(projectInfo.getProjectName());
         }
 
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.inProjectInfo(currentResume,itemOrder);
+
         resJson.put("isSucceed",true);
 
         return resJson.toString();
@@ -184,13 +206,12 @@ public class NewResumeCtrl {
             return resJson.toString();
         }
 
-        ArrayList<ProjectInfo> projectInfos = currentResume.getProjects();
-        if(itemOrder < projectInfos.size()){
-            projectInfos.remove(itemOrder);
-        }
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.deleteProjectInfo(currentResume,itemOrder);
 
+        ArrayList<ProjectInfo> projectInfos = currentResume.getProjects();
         JSONArray projects = new JSONArray();
-        for(ProjectInfo p:currentResume.getProjects()){
+        for(ProjectInfo p:projectInfos){
             projects.put(new JSONObject(p.toString()));
         }
 
@@ -242,6 +263,8 @@ public class NewResumeCtrl {
             temp.setStartDate(eduInfo.getStartDate());
             temp.setEndDate(eduInfo.getEndDate());
         }
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.inEduInfo(currentResume,itemOrder);
 
         resJson.put("isSucceed",true);
 
@@ -268,11 +291,10 @@ public class NewResumeCtrl {
             return resJson.toString();
         }
 
-        ArrayList<EduInfo> eduInfos = currentResume.getEducations();
-        if(itemOrder < eduInfos.size()){
-            eduInfos.remove(itemOrder);
-        }
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.deleteEduInfo(currentResume,itemOrder);
 
+        ArrayList<EduInfo> eduInfos = currentResume.getEducations();
         JSONArray educations = new JSONArray();
         for(EduInfo e:currentResume.getEducations()){
             educations.put(new JSONObject(e.toString()));

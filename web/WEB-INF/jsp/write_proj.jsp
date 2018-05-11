@@ -43,7 +43,7 @@
                 </c:forEach>
             </div>
             <button class="submit" onclick="addItem()">添加一项项目信息</button>
-            <button class="submit" onclick="nextStep()">下一步</button>
+            <button class="submit" onclick="location.reload();">下一步</button>
             <a href="./previousStep" class="submit">上一步</a>
 
         </div>
