@@ -5,6 +5,8 @@ import com.resumeweb.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -22,9 +24,11 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public void addUser(User u) {
+    public int addUser(User u) {
         String sql = "INSERT INTO user(user_account,password,email)VALUES(?,?,?)";
-        jdbcTemplateObject.update(sql,u.getUserAccount(),u.getPassword(),u.getEmail());
+        KeyHolder keyHolder=new GeneratedKeyHolder();
+        jdbcTemplateObject.update(sql,u.getUserAccount(),u.getPassword(),u.getEmail(),keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
     @Override

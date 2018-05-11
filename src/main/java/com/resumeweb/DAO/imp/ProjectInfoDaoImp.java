@@ -5,6 +5,8 @@ import com.resumeweb.entity.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -21,11 +23,13 @@ public class ProjectInfoDaoImp implements ProjectInfoDao {
     }
 
     @Override
-    public void addProjectInfo(ProjectInfo projectInfo) {
+    public int addProjectInfo(ProjectInfo projectInfo) {
         String sql="INSERT INTO project_info(user_id, pro_or_intern, " +
                 "project_name, start_date, end_date, description) VALUES (?,?,?,?,?,?)";
+        KeyHolder keyHolder=new GeneratedKeyHolder();
         jdbcTemplateObject.update(sql,projectInfo.getUserId(),projectInfo.getProOrIntern()
-        ,projectInfo.getProjectName(),projectInfo.getStartDate(),projectInfo.getEndDate(),projectInfo.getDescription());
+        ,projectInfo.getProjectName(),projectInfo.getStartDate(),projectInfo.getEndDate(),projectInfo.getDescription(),keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
     @Override

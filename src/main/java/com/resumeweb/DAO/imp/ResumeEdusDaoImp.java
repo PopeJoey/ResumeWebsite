@@ -4,6 +4,8 @@ import com.resumeweb.DAO.ResumeEdusDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -18,9 +20,11 @@ public class ResumeEdusDaoImp implements ResumeEdusDao{
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
-    public void addResumeEdus(int resume_id,int edu_info_id){
+    public int addResumeEdus(int resume_id,int edu_info_id){
         String sql="INSERT INTO resume_edus(resume_id, edu_info_id) VALUES (?,?)";
-        jdbcTemplateObject.update(sql,resume_id,edu_info_id);
+        KeyHolder keyHolder=new GeneratedKeyHolder();
+        jdbcTemplateObject.update(sql,resume_id,edu_info_id,keyHolder);
+        return keyHolder.getKey().intValue();
     }
     public void deleteResumeEdus(int resume_id,int edu_info_id){
         String sql="DELETE FROM resume_edus WHERE resume_id=? and edu_info_id = ?";

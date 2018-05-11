@@ -5,6 +5,8 @@ import com.resumeweb.entity.EduInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -23,12 +25,14 @@ public class EduInfoDaoImp implements EduInfoDao {
         this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
     @Override
-    public void addEduInfo(EduInfo eduInfo) {
+    public int addEduInfo(EduInfo eduInfo) {
         String sql="INSERT INTO edu_info(user_id, start_date, end_date, school, major, edu, rank) " +
                 "VALUES(?,?,?,?,?,?,?) ";
+        KeyHolder keyHolder=new GeneratedKeyHolder();
         jdbcTemplateObject.update(sql,eduInfo.getUserId(),eduInfo.getStartDate()
         ,eduInfo.getEndDate(),eduInfo.getSchool(),eduInfo.getMajor(),eduInfo.getEdu()
-        ,eduInfo.getRank());
+        ,eduInfo.getRank(),keyHolder);
+        return keyHolder.getKey().intValue();
 
     }
 

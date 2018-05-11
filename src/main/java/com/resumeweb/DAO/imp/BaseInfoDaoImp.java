@@ -5,6 +5,8 @@ import com.resumeweb.entity.BaseInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -22,15 +24,17 @@ public class BaseInfoDaoImp implements BaseInfoDao {
         this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
     @Override
-    public void addBaseInfo(BaseInfo baseInfo) {
+    public int addBaseInfo(BaseInfo baseInfo) {
         String sql="INSERT INTO base_info(user_id, name, gender, birth_date, " +
                 "highest_edu, phone_number, country, image_path, id_number," +
                 " marriage_status, ethnic_group, email, simple_introduction) " +
                 "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        KeyHolder keyHolder=new GeneratedKeyHolder();
         jdbcTemplateObject.update(sql,baseInfo.getUserId(),baseInfo.getName(),baseInfo.getGender(),baseInfo.getBirthDate()
         ,baseInfo.getHighestEdu(),baseInfo.getPhoneNumber(),baseInfo.getCountry(),baseInfo.getImagePath(),baseInfo.getIdNumber()
         ,baseInfo.getMarriageStatus(),baseInfo.getEthnicGroup(),baseInfo.getEmail(),baseInfo.getSimpleIntroduction()
-        );
+        ,keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
     @Override
