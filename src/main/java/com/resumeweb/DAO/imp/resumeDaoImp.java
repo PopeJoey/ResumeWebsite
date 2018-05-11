@@ -4,6 +4,8 @@ import com.resumeweb.DAO.ResumeDao;
 import com.resumeweb.entity.Resume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -15,10 +17,12 @@ public class resumeDaoImp implements ResumeDao {
         this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
     @Override
-    public void addResume(Resume resume) {
+    public int addResume(Resume resume) {
         String sql="INSERT INTO resume(resume_name, user_id, pattern_id, base_info_id) VALUES (?,?,?,?)";
+        KeyHolder keyHolder=new GeneratedKeyHolder();
         jdbcTemplateObject.update(sql,resume.getResumeName(),resume.getUserId()
-        ,resume.getPatternId(),resume.getBaseInfo().getBaseInfoId());
+        ,resume.getPatternId(),resume.getBaseInfo().getBaseInfoId(),keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
     @Override

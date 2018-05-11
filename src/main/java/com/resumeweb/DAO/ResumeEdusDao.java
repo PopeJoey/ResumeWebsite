@@ -9,7 +9,7 @@ public interface ResumeEdusDao{
      * @param resume_id 简历id
      * @param edu_info_id 教育信息id
      */
-    public void addResumeEdus(int resume_id,int edu_info_id);
+    public int addResumeEdus(int resume_id,int edu_info_id);
 
     /**
      * 删除一条简历-教育信息关系

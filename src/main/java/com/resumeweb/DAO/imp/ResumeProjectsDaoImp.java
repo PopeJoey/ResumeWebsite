@@ -5,6 +5,8 @@ import com.resumeweb.entity.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -22,15 +24,16 @@ public class ResumeProjectsDaoImp implements ResumeProjectsDao{
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
-    public void addResume_projects(int resume_id,int project_info_id){
+    public int addResume_projects(int resume_id,int project_info_id){
         String sql="INSERT INTO resume_projects(resume_id, project_info_id)" +
                 "VALUES (?,?)";
-        jdbcTemplateObject.update(sql,resume_id,project_info_id);
+        KeyHolder keyHolder=new GeneratedKeyHolder();
+        jdbcTemplateObject.update(sql,resume_id,project_info_id,keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
     public void deleteResume_projects(int resume_id,int project_info_id){
-        String sql="DELETE from resume_projects(resume_id, project_info_id)" +
-                "VALUES (?,?)";
+        String sql="DELETE from resume_projects WHERE resume_id=?and project_info_id=?";
         jdbcTemplateObject.update(sql,resume_id, project_info_id);
     }
 

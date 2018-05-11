@@ -9,7 +9,7 @@ public interface ResumeProjectsDao {
      * @param resume_id 简历id
      * @param project_info_id 项目id
      */
-    public void addResume_projects(int resume_id,int project_info_id);
+    public int addResume_projects(int resume_id,int project_info_id);
 
     /**
      * 删除一条简历-项目关系
