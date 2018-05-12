@@ -5,6 +5,8 @@ import com.resumeweb.entity.EduInfo;
 import com.resumeweb.entity.ProjectInfo;
 import com.resumeweb.entity.Resume;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -65,7 +67,7 @@ public class resumeDaoImp implements ResumeDao {
     public Resume getResume(final int resume_id) {
 
         String sql="SELECT * FROM resume WHERE resume_id=?";
-        Resume resume= (Resume) jdbcTemplateObject.queryForObject(sql, new Object[]{resume_id},new RowMapper<Resume>() {
+        Resume resume=  jdbcTemplateObject.queryForObject(sql, new RowMapper<Resume>() {
 
             @Override
             public Resume mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -74,16 +76,19 @@ public class resumeDaoImp implements ResumeDao {
                 resume.setResumeName(resultSet.getString(2));
                 resume.setUserId(resultSet.getInt(3));
                 resume.setPatternId(resultSet.getInt(4));
-                resume.getBaseInfo().setBaseInfoId(resultSet.getInt(5));
+                //resume.getBaseInfo().setBaseInfoId(resultSet.getInt(5));
                 return resume;
             }
-        });
-        WebApplicationContext context =
-                ContextLoader.getCurrentWebApplicationContext();
+        },resume_id);
+//        WebApplicationContext context =
+//                ContextLoader.getCurrentWebApplicationContext();
+        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
         EduInfoDao eduInfoDao = (EduInfoDao)context.getBean("eduInfoDao");
+        BaseInfoDao baseInfoDao=(BaseInfoDao)context.getBean("baseInfoDao");
+        resume.setBaseInfo(baseInfoDao.getBaseInfo(resume.getUserId()));
         ProjectInfoDao projectInfoDao=(ProjectInfoDao) context.getBean("projectInfoDao");
         ResumeEdusDao resumeEdusDao=(ResumeEdusDao) context.getBean("resumeEdusDao");
-        ResumeProjectsDao resumeProjectsDao=(ResumeProjectsDao) context.getBean("projectInfoDao");
+        ResumeProjectsDao resumeProjectsDao=(ResumeProjectsDao) context.getBean("resumeProjectsDao");
         ArrayList<EduInfo> educations=new ArrayList<EduInfo>();
         ArrayList<ProjectInfo> projects=new ArrayList<ProjectInfo>();
         //resume.setEducations(new ResumeEdusDaoImp().getEduInfoIds(resume_id));
@@ -119,4 +124,16 @@ public class resumeDaoImp implements ResumeDao {
         }
         return resumes;
     }
+
+//    public static void main(String[] args) {
+//        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+////        WebApplicationContext ctx =
+////                ContextLoader.getCurrentWebApplicationContext();
+//        ResumeDao dao=(ResumeDao) context.getBean("resumeDao");
+//        Resume resume= dao.getResume(19);
+//        System.out.println(resume.getUserId());
+//
+//
+//
+//    }
 }

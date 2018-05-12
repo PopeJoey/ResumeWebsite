@@ -34,7 +34,7 @@ public class ResumeEdusDaoImp implements ResumeEdusDao{
         return jdbcTemplateObject.query(sql, new RowMapper<Integer>() {
             @Override
             public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
-                return resultSet.getInt(2);
+                return resultSet.getInt(1);
             }
         },resume_id);
     }
