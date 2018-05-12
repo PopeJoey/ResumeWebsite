@@ -42,6 +42,7 @@
                         <form:input path="name" type="text" class="text" value="${sessionScope.currentResume.baseInfo.name}" placeholder="Name" />
                         <form:input path="birthDate" type="text" class="text" value="${sessionScope.currentResume.baseInfo.birthDate}" placeholder="BirthDay" />
                         <form:input path="phoneNumber" type="text" class="text" value="${sessionScope.currentResume.baseInfo.phoneNumber}" placeholder="PhoneNumber" style="margin-left: 10px" />
+                        <form:input path="highestEdu" type="text" class="text" value="${sessionScope.currentResume.baseInfo.highestEdu}" placeholder="Highest Education" />
                     </div>
                     <div class="contact-to" style="clear:both;">
                         <form:input path="country" type="text" class="text" value="${sessionScope.currentResume.baseInfo.country}" placeholder="Country" />
