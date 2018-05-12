@@ -1,5 +1,7 @@
 package com.resumeweb.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Date;
 
 public class ProjectInfo {
@@ -7,7 +9,11 @@ public class ProjectInfo {
     private int userId;
     private String proOrIntern;
     private String projectName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
     private String description;

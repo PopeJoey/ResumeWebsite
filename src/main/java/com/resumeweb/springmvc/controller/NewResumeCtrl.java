@@ -1,14 +1,14 @@
 package com.resumeweb.springmvc.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.resumeweb.entity.*;
 import com.resumeweb.service.ResumeService;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -112,13 +112,17 @@ public class NewResumeCtrl {
         }
         inBaseInfo.setUserId(userid);
         currentResume.setBaseInfo(inBaseInfo);
+
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.inBaseInfo(currentResume);
+
         session.setAttribute("currentStep",2);
         return stepList[2];
     }
 
-    //显示第四步
+    //处理第三步并显示第四步
     @RequestMapping("/newEduInfo")
-    public String newEduInfo(HttpSession session){
+    public String showEduInfoPage(HttpSession session){
         Integer userid = (Integer)session.getAttribute("currentUser");
         if(userid == null || userid < 0){
             return "redirect:/login";
@@ -131,68 +135,198 @@ public class NewResumeCtrl {
         return stepList[3];
     }
 
-    //处理第三步,Ajax交互
-    //新建简历--简历教育信息
-    @RequestMapping("/newEduInfoAjax")
-    public @ResponseBody String addEduInfo(@Valid EduInfo eduInfo,
-                                           BindingResult result,
-                                           HttpSession session){
-        Integer userid = (Integer) session.getAttribute("currentUser");
-        if(userid == null || userid < 0){
-            return "redirect:/login";
-        }
-        if(result.hasErrors()) {
-            return result.toString();
-        }
-        Resume currentResume = (Resume)session.getAttribute("currentResume");
-        if(currentResume == null){
-            session.setAttribute("currentStep",0);
-            return "";
-        }
-        ArrayList<EduInfo> eduInfos = currentResume.getEducations();
-        eduInfo.setUserId(userid);
-        eduInfos.add(eduInfo);
-        return "{'succeed':1}";
-    }
 
     //处理第四步,Ajax交互
     //新建简历--简历项目信息
     @RequestMapping("/newProjectInfoAjax")
-    public @ResponseBody String addProjectInfo(@Valid ProjectInfo projectInfo,
-                                           BindingResult result,
-                                           HttpSession session){
+    @ResponseBody
+    public String addProjectInfo(@RequestBody ProjectInfo projectInfo,
+                               @RequestParam("itemOrder") int itemOrder,
+                               BindingResult result,
+                               HttpSession session){
         Integer userid = (Integer) session.getAttribute("currentUser");
+        JSONObject resJson = new JSONObject();
+        resJson.put("isSucceed",false);
         if(userid == null || userid < 0){
-            return "redirect:/login";
+            resJson.put("errInfo","用户未登录，请求被拒绝");
+            return resJson.toString();
         }
         if(result.hasErrors()) {
-            return result.toString();
+            resJson.put("errInfo","表单格式不正确");
+            return resJson.toString();
         }
         Resume currentResume = (Resume)session.getAttribute("currentResume");
         if(currentResume == null){
             session.setAttribute("currentStep",0);
-            return "";
+            resJson.put("errInfo","新建简历出现某些问题，您需要刷新页面重新新建！");
+            return resJson.toString();
         }
+
         ArrayList<ProjectInfo> projectInfos = currentResume.getProjects();
-        projectInfo.setUserId(userid);
-        projectInfos.add( projectInfo);
-        return "{'succeed':1}";
+
+        if(itemOrder + 1 > projectInfos.size()){
+            //添加新的项目信息
+            projectInfo.setUserId(userid);
+            projectInfos.add( projectInfo);
+        }else{
+            //修改已有项目信息
+            ProjectInfo temp = projectInfos.get(itemOrder);
+            temp.setDescription(projectInfo.getDescription());
+            temp.setProOrIntern(projectInfo.getProOrIntern());
+            temp.setStartDate(projectInfo.getStartDate());
+            temp.setEndDate(projectInfo.getEndDate());
+            temp.setProjectName(projectInfo.getProjectName());
+        }
+
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.inProjectInfo(currentResume,itemOrder);
+
+        resJson.put("isSucceed",true);
+
+        return resJson.toString();
     }
 
+    //删除项目
+    @RequestMapping("/removeProjectAjax")
+    @ResponseBody
+    public String removeProject(@RequestParam("itemOrder")int itemOrder,
+                                HttpSession session){
+        Integer userid = (Integer) session.getAttribute("currentUser");
+        JSONObject resJson = new JSONObject();
+        resJson.put("isSucceed",false);
+        if(userid == null || userid < 0){
+            resJson.put("errInfo","用户未登录，请求被拒绝");
+            return resJson.toString();
+        }
+
+        Resume currentResume = (Resume)session.getAttribute("currentResume");
+        if(currentResume == null){
+            session.setAttribute("currentStep",0);
+            resJson.put("errInfo","新建简历出现某些问题，您需要刷新页面重新新建！");
+            return resJson.toString();
+        }
+
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.deleteProjectInfo(currentResume,itemOrder);
+
+        ArrayList<ProjectInfo> projectInfos = currentResume.getProjects();
+        JSONArray projects = new JSONArray();
+        for(ProjectInfo p:projectInfos){
+            projects.put(new JSONObject(p.toString()));
+        }
+
+        resJson.put("projects",projects);
+        resJson.put("isSucceed",true);
+
+        return resJson.toString();
+    }
+
+    //处理第三步,Ajax交互
+    //新建简历--简历教育信息
+    @RequestMapping("/newEduInfoAjax")
+    @ResponseBody
+    public String addEduInfo(@RequestBody EduInfo eduInfo,
+                             @RequestParam("itemOrder") int itemOrder,
+                             BindingResult result,
+                             HttpSession session){
+        Integer userid = (Integer) session.getAttribute("currentUser");
+        JSONObject resJson = new JSONObject();
+        resJson.put("isSucceed",false);
+        if(userid == null || userid < 0){
+            resJson.put("errInfo","用户未登录，请求被拒绝");
+            return resJson.toString();
+        }
+        if(result.hasErrors()) {
+            resJson.put("errInfo","表单格式不正确");
+            return resJson.toString();
+        }
+        Resume currentResume = (Resume)session.getAttribute("currentResume");
+        if(currentResume == null){
+            session.setAttribute("currentStep",0);
+            resJson.put("errInfo","新建简历出现某些问题，您需要刷新页面重新新建！");
+            return resJson.toString();
+        }
+
+        ArrayList<EduInfo> eduInfos = currentResume.getEducations();
+
+        if(itemOrder + 1 > eduInfos.size()){
+            //添加新的教育信息
+            eduInfo.setUserId(userid);
+            eduInfos.add(eduInfo);
+        }else{
+            //修改已有教育信息
+            EduInfo temp = eduInfos.get(itemOrder);
+            temp.setEdu(eduInfo.getEdu());
+            temp.setMajor(eduInfo.getMajor());
+            temp.setSchool(eduInfo.getSchool());
+            temp.setRank(eduInfo.getRank());
+            temp.setStartDate(eduInfo.getStartDate());
+            temp.setEndDate(eduInfo.getEndDate());
+        }
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.inEduInfo(currentResume,itemOrder);
+
+        resJson.put("isSucceed",true);
+
+        return resJson.toString();
+    }
+
+    //删除教育信息
+    @RequestMapping("/removeEduAjax")
+    @ResponseBody
+    public String removeEdu(@RequestParam("itemOrder")int itemOrder,
+                            HttpSession session){
+        Integer userid = (Integer) session.getAttribute("currentUser");
+        JSONObject resJson = new JSONObject();
+        resJson.put("isSucceed",false);
+        if(userid == null || userid < 0){
+            resJson.put("errInfo","用户未登录，请求被拒绝");
+            return resJson.toString();
+        }
+
+        Resume currentResume = (Resume)session.getAttribute("currentResume");
+        if(currentResume == null){
+            session.setAttribute("currentStep",0);
+            resJson.put("errInfo","新建简历出现某些问题，您需要刷新页面重新新建！");
+            return resJson.toString();
+        }
+
+        ResumeService service = (ResumeService)context.getBean("resumeService");
+        service.deleteEduInfo(currentResume,itemOrder);
+
+        ArrayList<EduInfo> eduInfos = currentResume.getEducations();
+        JSONArray educations = new JSONArray();
+        for(EduInfo e:currentResume.getEducations()){
+            educations.put(new JSONObject(e.toString()));
+        }
+
+        resJson.put("educations",educations);
+        resJson.put("isSucceed",true);
+
+        return resJson.toString();
+    }
 
     //新建简历--保存简历
     @RequestMapping("/addNewResume")
     public String addNewResume(HttpSession session){
+        session.setAttribute("currentStep",0);
         Integer userid = (Integer) session.getAttribute("currentUser");
         if(userid == null || userid < 0){
             return "redirect:/login";
         }
-        Resume resume = (Resume)session.getAttribute("currentResume");
-        ResumeService service = (ResumeService)context.getBean("resumeService");
-        service.addNewResume(resume);
-        session.removeAttribute("currentResume");
+        try {
+            Resume resume = (Resume) session.getAttribute("currentResume");
+            ResumeService service = (ResumeService) context.getBean("resumeService");
+            service.addNewResume(resume);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            session.removeAttribute("currentResume");
+        }
+
         return "redirect:/my";
     }
+
 
     /**
      * 简历模板列表

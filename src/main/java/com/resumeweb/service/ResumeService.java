@@ -1,7 +1,6 @@
 package com.resumeweb.service;
 
 import com.resumeweb.entity.EduInfo;
-import com.resumeweb.entity.ProjectInfo;
 import com.resumeweb.entity.Resume;
 
 import java.util.List;
@@ -28,15 +27,33 @@ public interface ResumeService {
     public void addNewResume(Resume resume);
 
     /**
-     * 保存教育信息到数据库，并填充教育信息id
-     * @param eduInfo 教育信息
+     * 将基础信息保存至数据库
+     * @param resume
      */
-    public void addNewEduInfo(EduInfo eduInfo);
+    public void inBaseInfo(Resume resume);
 
     /**
-     * 保存项目信息到数据库，并填充项目信息id
+     * 将教育信息保存至数据库
+     * @param Resume
+     */
+    public void inEduInfo(Resume resume,int index);
+
+    /**
+     * 删除教育信息
+     * @param eduInfo
+     */
+    public void deleteEduInfo(Resume resume,int index);
+
+    /**
+     * 将项目信息保存至数据库
+     * @param resume
+     */
+    public void inProjectInfo(Resume resume,int index);
+
+    /**
+     * 删除项目信息
      * @param projectInfo
      */
-    public void addNewProjectInfo(ProjectInfo projectInfo);
+    public void deleteProjectInfo(Resume resume,int index);
 
 }
