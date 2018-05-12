@@ -5,11 +5,15 @@ import com.resumeweb.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @Repository
 public class UserDaoImp implements UserDao {
@@ -24,10 +28,23 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public int addUser(User u) {
-        String sql = "INSERT INTO user(user_account,password,email)VALUES(?,?,?)";
+    public int addUser(final User u) {
+//        String sql = "INSERT INTO user(user_account,password,email)VALUES(?,?,?)";
+//        KeyHolder keyHolder=new GeneratedKeyHolder();
+//        jdbcTemplateObject.update(sql,u.getUserAccount(),u.getPassword(),u.getEmail(),keyHolder);
+//        return keyHolder.getKey().intValue();
+        final String sql = "INSERT INTO user(user_account,password,email)VALUES(?,?,?)";
         KeyHolder keyHolder=new GeneratedKeyHolder();
-        jdbcTemplateObject.update(sql,u.getUserAccount(),u.getPassword(),u.getEmail(),keyHolder);
+        jdbcTemplateObject.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps=connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+                ps.setString(1,u.getUserAccount());
+                ps.setString(2,u.getPassword());
+                ps.setString(3,u.getEmail());
+                return ps;
+            }
+        },keyHolder);
         return keyHolder.getKey().intValue();
     }
 

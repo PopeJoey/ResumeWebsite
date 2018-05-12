@@ -27,9 +27,8 @@ public class ResumeProjectsDaoImp implements ResumeProjectsDao{
     public int addResume_projects(int resume_id,int project_info_id){
         String sql="INSERT INTO resume_projects(resume_id, project_info_id)" +
                 "VALUES (?,?)";
-        KeyHolder keyHolder=new GeneratedKeyHolder();
-        jdbcTemplateObject.update(sql,resume_id,project_info_id,keyHolder);
-        return keyHolder.getKey().intValue();
+        jdbcTemplateObject.update(sql,resume_id,project_info_id);
+        return 1;
     }
 
     public void deleteResume_projects(int resume_id,int project_info_id){

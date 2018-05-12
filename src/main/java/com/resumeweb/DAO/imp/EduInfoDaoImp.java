@@ -4,12 +4,15 @@ import com.resumeweb.DAO.EduInfoDao;
 import com.resumeweb.entity.EduInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -25,13 +28,28 @@ public class EduInfoDaoImp implements EduInfoDao {
         this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
     @Override
-    public int addEduInfo(EduInfo eduInfo) {
-        String sql="INSERT INTO edu_info(user_id, start_date, end_date, school, major, edu, rank) " +
+    public int addEduInfo(final EduInfo eduInfo) {
+        final String sql="INSERT INTO edu_info(user_id, start_date, end_date, school, major, edu, rank) " +
                 "VALUES(?,?,?,?,?,?,?) ";
         KeyHolder keyHolder=new GeneratedKeyHolder();
-        jdbcTemplateObject.update(sql,eduInfo.getUserId(),eduInfo.getStartDate()
-        ,eduInfo.getEndDate(),eduInfo.getSchool(),eduInfo.getMajor(),eduInfo.getEdu()
-        ,eduInfo.getRank(),keyHolder);
+//        jdbcTemplateObject.update(sql,eduInfo.getUserId(),eduInfo.getStartDate()
+//        ,eduInfo.getEndDate(),eduInfo.getSchool(),eduInfo.getMajor(),eduInfo.getEdu()
+//        ,eduInfo.getRank(),keyHolder);
+        jdbcTemplateObject.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps=connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+                ps.setInt(1,eduInfo.getUserId());
+                ps.setDate(2,eduInfo.getStartDate());
+                ps.setDate(3,eduInfo.getEndDate());
+                ps.setString(4,eduInfo.getSchool());
+                ps.setString(5,eduInfo.getMajor());
+                ps.setString(6,eduInfo.getEdu());
+                ps.setString(7,eduInfo.getRank());
+                return ps;
+
+            }
+        },keyHolder);
         return keyHolder.getKey().intValue();
 
     }
