@@ -90,7 +90,8 @@ public class ResumeServiceImp implements ResumeService{
             if(info.getEduInfoId() > 0){
                 eduInfoDao.updateEduInfo(info);
             }else{
-                eduInfoDao.addEduInfo(info);
+                int eid = eduInfoDao.addEduInfo(info);
+                info.setEduInfoId(eid);
             }
         }else{
             throw new IndexOutOfBoundsException("index > list size");

@@ -206,8 +206,10 @@ public class NewResumeCtrl {
             return resJson.toString();
         }
 
-        ResumeService service = (ResumeService)context.getBean("resumeService");
-        service.deleteProjectInfo(currentResume,itemOrder);
+        try {
+            ResumeService service = (ResumeService) context.getBean("resumeService");
+            service.deleteProjectInfo(currentResume, itemOrder);
+        }catch (Exception e){}
 
         ArrayList<ProjectInfo> projectInfos = currentResume.getProjects();
         JSONArray projects = new JSONArray();
@@ -263,6 +265,7 @@ public class NewResumeCtrl {
             temp.setStartDate(eduInfo.getStartDate());
             temp.setEndDate(eduInfo.getEndDate());
         }
+
         ResumeService service = (ResumeService)context.getBean("resumeService");
         service.inEduInfo(currentResume,itemOrder);
 
@@ -291,8 +294,10 @@ public class NewResumeCtrl {
             return resJson.toString();
         }
 
-        ResumeService service = (ResumeService)context.getBean("resumeService");
-        service.deleteEduInfo(currentResume,itemOrder);
+        try {
+            ResumeService service = (ResumeService) context.getBean("resumeService");
+            service.deleteEduInfo(currentResume, itemOrder);
+        }catch (Exception e){}
 
         ArrayList<EduInfo> eduInfos = currentResume.getEducations();
         JSONArray educations = new JSONArray();
