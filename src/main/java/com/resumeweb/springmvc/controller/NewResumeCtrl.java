@@ -16,6 +16,7 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -162,7 +163,7 @@ public class NewResumeCtrl {
             return resJson.toString();
         }
 
-        ArrayList<ProjectInfo> projectInfos = currentResume.getProjects();
+        List<ProjectInfo> projectInfos = currentResume.getProjects();
 
         if(itemOrder + 1 > projectInfos.size()){
             //添加新的项目信息
@@ -211,7 +212,7 @@ public class NewResumeCtrl {
             service.deleteProjectInfo(currentResume, itemOrder);
         }catch (Exception e){}
 
-        ArrayList<ProjectInfo> projectInfos = currentResume.getProjects();
+        List<ProjectInfo> projectInfos = currentResume.getProjects();
         JSONArray projects = new JSONArray();
         for(ProjectInfo p:projectInfos){
             projects.put(new JSONObject(p.toString()));
@@ -249,7 +250,7 @@ public class NewResumeCtrl {
             return resJson.toString();
         }
 
-        ArrayList<EduInfo> eduInfos = currentResume.getEducations();
+        List<EduInfo> eduInfos = currentResume.getEducations();
 
         if(itemOrder + 1 > eduInfos.size()){
             //添加新的教育信息
@@ -299,7 +300,7 @@ public class NewResumeCtrl {
             service.deleteEduInfo(currentResume, itemOrder);
         }catch (Exception e){}
 
-        ArrayList<EduInfo> eduInfos = currentResume.getEducations();
+        List<EduInfo> eduInfos = currentResume.getEducations();
         JSONArray educations = new JSONArray();
         for(EduInfo e:currentResume.getEducations()){
             educations.put(new JSONObject(e.toString()));
@@ -322,7 +323,7 @@ public class NewResumeCtrl {
         try {
             Resume resume = (Resume) session.getAttribute("currentResume");
             ResumeService service = (ResumeService) context.getBean("resumeService");
-            service.addNewResume(resume);
+            service.saveResume(resume);
         }catch (Exception e){
             e.printStackTrace();
         }finally {

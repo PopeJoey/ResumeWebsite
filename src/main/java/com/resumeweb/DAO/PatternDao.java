@@ -10,4 +10,11 @@ public interface PatternDao {
      * @return List<Pattern>
      */
     public List<Pattern> getPatternList();
+
+    /**
+     * 通过pid获取pattern
+     * @param pid
+     * @return
+     */
+    public Pattern getPattern(int pid);
 }

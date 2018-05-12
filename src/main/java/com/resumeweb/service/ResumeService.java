@@ -1,5 +1,6 @@
 package com.resumeweb.service;
 
+import com.resumeweb.entity.Pattern;
 import com.resumeweb.entity.Resume;
 
 import java.util.List;
@@ -13,6 +14,13 @@ public interface ResumeService {
     public Map<Integer,String> getPatternMap();
 
     /**
+     * 通过pid获取pattern
+     * @param pid
+     * @return
+     */
+    public Pattern getPattern(int pid);
+
+    /**
      * 获取用户简历列表
      * @param userId 用户id
      * @return List<Resume>简历列表
@@ -20,10 +28,16 @@ public interface ResumeService {
     public List<Resume> getResumeList(int userId);
 
     /**
+     * 通过resumeId获取resume
+     * @param resumeId
+     * @return
+     */
+    public Resume getResumeByRid(int resumeId);
+    /**
      * 增加新的简历
      * @param resume 简历对象
      */
-    public void addNewResume(Resume resume);
+    public void saveResume(Resume resume);
 
     /**
      * 将基础信息保存至数据库

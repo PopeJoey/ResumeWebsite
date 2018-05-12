@@ -36,4 +36,28 @@ public class PatternDaoImp implements PatternDao {
             }
         });
     }
+
+    /**
+     * 通过pid获取pattern
+     *
+     * @param pid
+     * @return
+     */
+    @Override
+    public Pattern getPattern(int pid) {
+        String sql = "SELECT * FROM pattern WHERE pattern_id = ?";
+        return jdbcTemplateObject.queryForObject(sql,new Object[]{pid}, new RowMapper<Pattern>() {
+            @Override
+            public Pattern mapRow(ResultSet resultSet, int i) throws SQLException {
+                Pattern pattern = new Pattern();
+                pattern.setPatternId(resultSet.getInt(1));
+                pattern.setPatternName(resultSet.getString(2));
+                pattern.setPatternPath(resultSet.getString(3));
+                pattern.setPatternClass(resultSet.getString(4));
+                pattern.setPatternPreviewPic(resultSet.getString(5));
+                pattern.setPatternInfo(resultSet.getString(6));
+                return pattern;
+            }
+        });
+    }
 }
