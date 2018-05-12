@@ -22,34 +22,75 @@ public class ResumeServiceImp implements ResumeService{
         return result;
     }
 
-    @Override
-    public List<Resume> getResumeList(int userId) {
-        return null;
-    }
-
     /**
-     * 增加新的简历
-     * @param resume 简历对象
+     * 通过pid获取pattern
+     *
+     * @param pid
+     * @return
      */
     @Override
-    public void addNewResume(Resume resume) {
+    public Pattern getPattern(int pid) {
+        WebApplicationContext context =
+                ContextLoader.getCurrentWebApplicationContext();
+        PatternDao patternDao = (PatternDao)context.getBean("patternDao");
+        return patternDao.getPattern(pid);
+    }
+
+    @Override
+    public List<Resume> getResumeList(int userId) {
         WebApplicationContext context =
                 ContextLoader.getCurrentWebApplicationContext();
         ResumeDao resumeDao = (ResumeDao)context.getBean("resumeDao");
-        int rid = resumeDao.addResume(resume);
-        resume.setResumeId(rid);
+        List<Resume> resumes = resumeDao.getAllResumes(userId);
+        return resumes;
+
+    }
+
+    /**
+     * 通过resumeId获取resume
+     *
+     * @param resumeId
+     * @return
+     */
+    @Override
+    public Resume getResumeByRid(int resumeId) {
+        WebApplicationContext context =
+                ContextLoader.getCurrentWebApplicationContext();
+        ResumeDao resumeDao = (ResumeDao)context.getBean("resumeDao");
+        return resumeDao.getResume(resumeId);
+    }
+
+    /**
+     * 保存简历
+     * @param resume 简历对象
+     */
+    @Override
+    public void saveResume(Resume resume) {
+        WebApplicationContext context =
+                ContextLoader.getCurrentWebApplicationContext();
+        ResumeDao resumeDao = (ResumeDao)context.getBean("resumeDao");
+        if(resume.getResumeId() > 0){
+            resumeDao.updateResume(resume);
+        }else {
+            int rid = resumeDao.addResume(resume);
+            resume.setResumeId(rid);
+        }
 
         if(resume.getEducations().size() > 0){
             ResumeEdusDao resumeEdusDao = (ResumeEdusDao) context.getBean("resumeEdusDao");
             for(EduInfo info:resume.getEducations()){
-                resumeEdusDao.addResumeEdus(rid,info.getEduInfoId());
+                try {
+                    resumeEdusDao.addResumeEdus(resume.getResumeId(), info.getEduInfoId());
+                }catch (Exception e){}
             }
         }
 
         if(resume.getProjects().size() > 0){
             ResumeProjectsDao resumeProjectsDao = (ResumeProjectsDao)context.getBean("resumeProjectsDao");
             for(ProjectInfo info:resume.getProjects()){
-                resumeProjectsDao.addResume_projects(rid,info.getProjectInfoId());
+                try {
+                    resumeProjectsDao.addResume_projects(resume.getResumeId(), info.getProjectInfoId());
+                }catch (Exception e){}
             }
         }
     }
@@ -81,7 +122,7 @@ public class ResumeServiceImp implements ResumeService{
      */
     @Override
     public void inEduInfo(Resume resume,int index) {
-        ArrayList<EduInfo> eduInfos = resume.getEducations();
+        List<EduInfo> eduInfos = resume.getEducations();
         if(index < eduInfos.size()){
             WebApplicationContext context =
                     ContextLoader.getCurrentWebApplicationContext();
@@ -106,7 +147,7 @@ public class ResumeServiceImp implements ResumeService{
      */
     @Override
     public void deleteEduInfo(Resume resume,int index) {
-        ArrayList<EduInfo> eduInfos = resume.getEducations();
+        List<EduInfo> eduInfos = resume.getEducations();
         if(index < eduInfos.size()){
             WebApplicationContext context =
                     ContextLoader.getCurrentWebApplicationContext();
@@ -128,7 +169,7 @@ public class ResumeServiceImp implements ResumeService{
      */
     @Override
     public void inProjectInfo(Resume resume,int index) {
-        ArrayList<ProjectInfo> projectInfos = resume.getProjects();
+        List<ProjectInfo> projectInfos = resume.getProjects();
 
         if(index < projectInfos.size()){
             WebApplicationContext context =
@@ -153,7 +194,7 @@ public class ResumeServiceImp implements ResumeService{
      */
     @Override
     public void deleteProjectInfo(Resume resume,int index) {
-        ArrayList<ProjectInfo> projectInfos = resume.getProjects();
+        List<ProjectInfo> projectInfos = resume.getProjects();
 
         if(index < projectInfos.size()){
             WebApplicationContext context =

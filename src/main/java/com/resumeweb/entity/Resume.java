@@ -1,6 +1,6 @@
 package com.resumeweb.entity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Resume {
     private int resumeId;
@@ -9,8 +9,8 @@ public class Resume {
 
     private int patternId;
     private BaseInfo baseInfo;
-    private ArrayList<EduInfo> educations;
-    private ArrayList<ProjectInfo> projects;
+    private List<EduInfo> educations;
+    private List<ProjectInfo> projects;
 
     public int getResumeId() {
         return resumeId;
@@ -44,19 +44,19 @@ public class Resume {
         this.baseInfo = baseInfo;
     }
 
-    public ArrayList<EduInfo> getEducations() {
+    public List<EduInfo> getEducations() {
         return educations;
     }
 
-    public void setEducations(ArrayList<EduInfo> educations) {
+    public void setEducations(List<EduInfo> educations) {
         this.educations = educations;
     }
 
-    public ArrayList<ProjectInfo> getProjects() {
+    public List<ProjectInfo> getProjects() {
         return projects;
     }
 
-    public void setProjects(ArrayList<ProjectInfo> projects) {
+    public void setProjects(List<ProjectInfo> projects) {
         this.projects = projects;
     }
 
