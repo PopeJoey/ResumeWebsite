@@ -1,6 +1,5 @@
 package com.resumeweb.service;
 
-import com.resumeweb.entity.EduInfo;
 import com.resumeweb.entity.Resume;
 
 import java.util.List;

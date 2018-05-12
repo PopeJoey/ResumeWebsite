@@ -62,6 +62,7 @@ public class ResumeServiceImp implements ResumeService{
     @Override
     public void inBaseInfo(Resume resume) {
         BaseInfo baseInfo = resume.getBaseInfo();
+        System.out.println(baseInfo);
         WebApplicationContext context =
                 ContextLoader.getCurrentWebApplicationContext();
         BaseInfoDao baseInfoDao = (BaseInfoDao)context.getBean("baseInfoDao");

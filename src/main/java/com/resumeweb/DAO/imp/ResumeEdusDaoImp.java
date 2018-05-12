@@ -22,9 +22,8 @@ public class ResumeEdusDaoImp implements ResumeEdusDao{
     }
     public int addResumeEdus(int resume_id,int edu_info_id){
         String sql="INSERT INTO resume_edus(resume_id, edu_info_id) VALUES (?,?)";
-        KeyHolder keyHolder=new GeneratedKeyHolder();
-        jdbcTemplateObject.update(sql,resume_id,edu_info_id,keyHolder);
-        return keyHolder.getKey().intValue();
+        jdbcTemplateObject.update(sql,resume_id,edu_info_id);
+        return 1;
     }
     public void deleteResumeEdus(int resume_id,int edu_info_id){
         String sql="DELETE FROM resume_edus WHERE resume_id=? and edu_info_id = ?";

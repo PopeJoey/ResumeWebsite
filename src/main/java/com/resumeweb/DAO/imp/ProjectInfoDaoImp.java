@@ -4,12 +4,15 @@ import com.resumeweb.DAO.ProjectInfoDao;
 import com.resumeweb.entity.ProjectInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -23,12 +26,25 @@ public class ProjectInfoDaoImp implements ProjectInfoDao {
     }
 
     @Override
-    public int addProjectInfo(ProjectInfo projectInfo) {
-        String sql="INSERT INTO project_info(user_id, pro_or_intern, " +
+    public int addProjectInfo(final ProjectInfo projectInfo) {
+       final String sql="INSERT INTO project_info(user_id, pro_or_intern, " +
                 "project_name, start_date, end_date, description) VALUES (?,?,?,?,?,?)";
         KeyHolder keyHolder=new GeneratedKeyHolder();
-        jdbcTemplateObject.update(sql,projectInfo.getUserId(),projectInfo.getProOrIntern()
-        ,projectInfo.getProjectName(),projectInfo.getStartDate(),projectInfo.getEndDate(),projectInfo.getDescription(),keyHolder);
+//        jdbcTemplateObject.update(sql,projectInfo.getUserId(),projectInfo.getProOrIntern()
+//        ,projectInfo.getProjectName(),projectInfo.getStartDate(),projectInfo.getEndDate(),projectInfo.getDescription(),keyHolder);
+        jdbcTemplateObject.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps=connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+                ps.setInt(1,projectInfo.getUserId());
+                ps.setString(2,projectInfo.getProOrIntern());
+                ps.setString(3,projectInfo.getProjectName());
+                ps.setDate(4,projectInfo.getStartDate());
+                ps.setDate(5,projectInfo.getEndDate());
+                ps.setString(6,projectInfo.getDescription());
+                return ps;
+            }
+        },keyHolder);
         return keyHolder.getKey().intValue();
     }
 
