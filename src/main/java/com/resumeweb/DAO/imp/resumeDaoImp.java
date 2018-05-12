@@ -65,7 +65,7 @@ public class resumeDaoImp implements ResumeDao {
     public Resume getResume(final int resume_id) {
 
         String sql="SELECT * FROM resume WHERE resume_id=?";
-        Resume resume= (Resume) jdbcTemplateObject.queryForObject(sql, new RowMapper<Resume>() {
+        Resume resume= (Resume) jdbcTemplateObject.queryForObject(sql, new Object[]{resume_id},new RowMapper<Resume>() {
 
             @Override
             public Resume mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -77,7 +77,7 @@ public class resumeDaoImp implements ResumeDao {
                 resume.getBaseInfo().setBaseInfoId(resultSet.getInt(5));
                 return resume;
             }
-        },resume_id);
+        });
         WebApplicationContext context =
                 ContextLoader.getCurrentWebApplicationContext();
         EduInfoDao eduInfoDao = (EduInfoDao)context.getBean("eduInfoDao");
