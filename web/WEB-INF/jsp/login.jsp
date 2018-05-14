@@ -8,6 +8,7 @@
 
         body{
             background: url("images/login1.jpg");
+            background-repeat: repeat-x;
             animation-name:myfirst;
             animation-duration:12s;
             animation-delay:2s;

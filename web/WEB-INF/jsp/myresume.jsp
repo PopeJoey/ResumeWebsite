@@ -22,9 +22,10 @@
     </div>
 </div>
 
-<a href="./newResume" >新建简历</a>
-
 <div class="container" style="height:360px">
+    <div>
+        <a href="./newResume" class="submit" style="padding-left: 5px;" ><span class="glyphicon glyphicon-plus"></span>新建简历</a>
+    </div>
     <table class="table">
         <thead>
         <tr>

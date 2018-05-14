@@ -8,16 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="header">
-    <div class="container">
-        <div class="top">
+    <div style="padding-right: 22px;">
+        <div class="top" align="right">
             <c:choose>
                 <c:when test="${sessionScope.currentUser > 0}" >
                     Hello,${sessionScope.userName}
-                    <a href="./logout">注销</a>
+                    <a style="display:inline-block;text-decoration: none;" href="./logout">注销</a>
                 </c:when>
                 <c:otherwise>
-                    <a href="./login">登录</a>
-                    <a href="./register">注册</a>
+                    <a style="display:inline-block;text-decoration: none;" href="./login">登录</a>
+                    <a style="display:inline-block;text-decoration: none;margin-left: 5px;" href="./register">注册</a>
                 </c:otherwise>
             </c:choose>
         </div>

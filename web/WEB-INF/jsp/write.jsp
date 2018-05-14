@@ -34,11 +34,13 @@
                             <form:options items="${patternList}" />
                         </form:select>
                     </div>
+                </div>
+            <div>
                     <div class="submit">
                         <button type="submit" class="btn btn-success">保存信息</button>
                     </div>
 
-                    <div> <a href="./previousStep" class="submit">上一步</a> </div>
+                    <div> <a href="./previousStep" class="submit" style="width:104px;text-align:center">上一步</a> </div>
                 </div>
             </form:form>
         </div>
