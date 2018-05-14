@@ -70,9 +70,7 @@
                     </div>
                     <br>
                     <div class="form-group col-md-offset-9">
-                        <a href="./register">
-                            <button type="submit" class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc">无账号？注册</button>
-                        </a>
+                        <a href="./register" type="submit" class="btn btn-success" style="width:100%;background-color: #7cc4cc;border-color: #7cc4cc">无账号？注册</a>
                     </div>
                     <br>
                 </div>

@@ -39,7 +39,7 @@
             <td>${resume.resumeId}</td>
             <td>${resume.resumeName}</td>
             <td>
-                <a href="./modefyResume/${resume.resumeId}" class="btn btn-default btn-sm">修改</a>
+                <a href="./modifyResume/${resume.resumeId}" class="btn btn-default btn-sm">修改</a>
                 <a href="./previewResume/${resume.resumeId}"  class="btn btn-default btn-sm">预览</a>
                 <a href="./downloadResume/${resume.resumeId}"  class="btn btn-default btn-sm">下载</a>
                 <a href="javascript:void(0)" onclick="deleteResume(${resume.resumeId})"  class="btn btn-default btn-sm">删除</a>

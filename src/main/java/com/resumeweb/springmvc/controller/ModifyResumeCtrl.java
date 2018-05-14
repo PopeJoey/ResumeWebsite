@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -28,6 +29,13 @@ public class ModifyResumeCtrl {
         if(resume != null){
             session.setAttribute("currentResume",resume);
         }
+        session.setAttribute("currentStep",0);
         return "forward:/newResume";
+    }
+
+    @RequestMapping("/modifyResume/**/**")
+    public String staticResource(HttpServletRequest request){
+        String url = request.getRequestURI().toString();
+        return "redirect:" + url.substring(13,url.length());
     }
 }
